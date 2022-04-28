@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DataAccess.Abstract;
-using Entities.Concerete;
+using Entities.Concrete;
 
 namespace DataAccess.Concrete.InMemory
 {
-    public class InMemoryCarDal :ICarDal
+    public class InMemoryCarDal : ICarDal
     {
         //-----------------Dependency Injection------------------
         //Global değişken
@@ -28,11 +28,12 @@ namespace DataAccess.Concrete.InMemory
             };
         }
 
-
-        public List<Car> GetById(int BrandId)
+        public List<Car> GetById(int BrandId, int Id)
         {
             //LINQ
             return _car.Where(c => c.BrandId == BrandId).ToList();
+            return _car.Where(c => c.Id == Id).ToList();
+
         }
 
         public List<Car> GetAll()

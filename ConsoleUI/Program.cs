@@ -3,7 +3,7 @@ using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
 using Business.Concrete;
 using DataAccess.Concrete.InMemory;
-using Entities.Concerete;
+using Entities.Concrete;
 
 
 namespace ConsoleUI

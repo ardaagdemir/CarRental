@@ -4,7 +4,7 @@ using System.Text;
 using Business.Abstract;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
-using Entities.Concerete;
+using Entities.Concrete;
 
 namespace Business.Concrete
 {

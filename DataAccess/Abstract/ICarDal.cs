@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Entities.Concerete;
+using Entities.Concrete;
 
 namespace DataAccess.Abstract
 {
@@ -9,7 +9,7 @@ namespace DataAccess.Abstract
     //Database operation
     public interface ICarDal
     { 
-        List<Car> GetById(int BrandId);
+        List<Car> GetById(int BrandId, int Id);
         List<Car> GetAll();
         void Add(Car car);
         void Delete(Car car);

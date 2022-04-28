@@ -4,7 +4,7 @@ using System.Text;
 using System.Transactions;
 using Entities.Abstract;
 
-namespace Entities.Concerete
+namespace Entities.Concrete
 {
     public class Car : IEntity
     {
