@@ -9,7 +9,7 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             Car car = new Car();
-            car.
+            
         }
     }
 }

@@ -7,6 +7,6 @@ namespace Entities.Abstract
 
     public interface IEntity
     {
-
+        //public string CarName { get; set; }
     }
 }

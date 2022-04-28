@@ -14,6 +14,5 @@ namespace Entities.Concerete
         public double ModelYear { get; set; }
         public double DailyPrice { get; set; }
         public string Description { get; set; }
-
     }
 }
