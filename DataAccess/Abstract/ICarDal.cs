@@ -9,7 +9,7 @@ namespace DataAccess.Abstract
     //Database operation
     public interface ICarDal
     { 
-        List<Car> GetById(int BrandId, int Id);
+        List<Car> GetById(int BrandId);
         List<Car> GetAll();
         void Add(Car car);
         void Delete(Car car);

@@ -28,11 +28,11 @@ namespace DataAccess.Concrete.InMemory
             };
         }
 
-        public List<Car> GetById(int BrandId, int Id)
+        public List<Car> GetById(int BrandId)
         {
             //LINQ
             return _car.Where(c => c.BrandId == BrandId).ToList();
-            return _car.Where(c => c.Id == Id).ToList();
+            
 
         }
 
