@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using DataAccess.Abstract;
@@ -45,12 +46,21 @@ namespace DataAccess.Concrete.EntityFramework
 
         public Car Get(Expression<Func<Car, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            using (CarRentalDBContext context = new CarRentalDBContext())
+            {
+                //Tek bir veri getirmek için DBSet'lerden Car' a git ve SingleOfDefault' a verilen filtreye göre getir.
+                return context.Set<Car>().SingleOrDefault(filter);
+            }
         }
 
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            using (CarRentalDBContext context = new CarRentalDBContext())
+            {
+                //Eğer filtre verilmemişse tüm veriyi getir,:, verilmemişse Car tablosundaki bütün veriyi Listele ve getir.
+                return filter == null ? context.Set<Car>().ToList() : context.Set<Car>().Where(filter).ToList();
+
+            }
         }
     }
 }
