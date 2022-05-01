@@ -14,7 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
         public void Add(Car entity)
         {
             //Belleğin hızlıca temizlenmesini sağlayan blok
-            //IDisposable Pattern Implementation of C#
+            //IDisposable Pattern Implementation of C# -- Search
             using (CarRentalDBContext context = new CarRentalDBContext())
             {
                 //Referansı yakala, ekle ve tut
@@ -57,9 +57,9 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (CarRentalDBContext context = new CarRentalDBContext())
             {
-                //Eğer filtre verilmemişse tüm veriyi getir,:, verilmemişse Car tablosundaki bütün veriyi Listele ve getir.
+                //Ternary Operator
+                //Eğer filtre verilmemişse tüm veriyi getir,:, verilmemişse Car tablosundaki filtrelenen veriyi Listele ve getir.
                 return filter == null ? context.Set<Car>().ToList() : context.Set<Car>().Where(filter).ToList();
-
             }
         }
     }

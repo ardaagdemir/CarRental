@@ -5,6 +5,8 @@ using Entities.Concrete;
 
 namespace DataAccess.Abstract
 {
+    //Dal---> Data Access Layer
+    //Database operation
     public interface IBrandDal : IEntityRepository<Brand>
     {
     }
