@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using DataAccess.Abstract;
@@ -43,12 +44,18 @@ namespace DataAccess.Concrete
 
         public Brand Get(Expression<Func<Brand, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            using (CarRentalDBContext context = new CarRentalDBContext())
+            {
+                return context.Set<Brand>().SingleOrDefault(filter);
+            }
         }
 
         public List<Brand> GetAll(Expression<Func<Brand, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            using (CarRentalDBContext context = new CarRentalDBContext())
+            {
+                return filter == null ? context.Set<Brand>().ToList() : context.Set<Brand>().Where(filter).ToList();
+            }
         }
     }
 }

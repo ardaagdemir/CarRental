@@ -18,9 +18,6 @@ namespace ConsoleUI
             {
                 Console.WriteLine(item.Description);
             }
-
-
-            
         }
     }
 }
