@@ -16,6 +16,7 @@ namespace DataAccess.Abstract
 
         //Refactoring--GetAll, GetById metotlara verilen parametreler içerisinden seçim yapmaya yarar
         //Expression; id, name parametrelerini verebilmek için Linq ile kullanılacak
+        //Expression-->Predicıt??
         T Get(Expression<Func<T, bool>> filter = null);
         List<T> GetAll(Expression<Func<T,bool>> filter=null); 
 

@@ -13,7 +13,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Car entity)
         {
-            //Belleğin hızlıca temizlenmesini sağlayan blok
+            //Belleğin hızlıca temizlenmesini sağlayan blok(dispose)
             //IDisposable Pattern Implementation of C# -- Search
             using (CarRentalDBContext context = new CarRentalDBContext())
             {
@@ -21,6 +21,8 @@ namespace DataAccess.Concrete.EntityFramework
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
                 context.SaveChanges();
+
+                context.Cars.Add(entity);
             }
         }
 
@@ -50,6 +52,7 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 //Tek bir veri getirmek için DBSet'lerden Car' a git ve SingleOfDefault' a verilen filtreye göre getir.
                 return context.Set<Car>().SingleOrDefault(filter);
+                
             }
         }
 
