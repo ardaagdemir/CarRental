@@ -22,5 +22,10 @@ namespace Business.Concrete
         {
             return _carDal.GetAll();
         }
+
+        public void Add()
+        {
+            Console.WriteLine("Eklendi");
+        }
     }
 }

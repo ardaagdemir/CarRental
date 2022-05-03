@@ -59,7 +59,9 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 //Ternary Operator
                 //Eğer filtre verilmemişse tüm veriyi getir,:, verilmemişse Car tablosundaki filtrelenen veriyi Listele ve getir.
-                return filter == null ? context.Set<Car>().ToList() : context.Set<Car>().Where(filter).ToList();
+                return filter == null 
+                    ? context.Set<Car>().ToList() 
+                    : context.Set<Car>().Where(filter).ToList();
             }
         }
     }
