@@ -6,7 +6,7 @@ using Core.Entities;
 
 namespace Core.DataAccess
 {
-    //BASE CRUP OPERATION
+    //BASE CRUD OPERATION
 
     //Generic Repository Design Pattern
     //Generic Constraint -- T Parametresini kısıtlamak gerekiyor. class=referans tip olduğunu belirtir. IEntity' ye ait bir new'lenen referans tip olabilir.
