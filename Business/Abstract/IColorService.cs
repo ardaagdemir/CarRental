@@ -5,9 +5,9 @@ using Entities.Concrete;
 
 namespace Business.Abstract
 {
-    public interface IBrandService
+    public interface IColorService
     {
-        List<Brand> GetAll();
-        List<Brand> GetByBrandId(int brandId);
+        List<Color> GetAll();
+        List<Color> GetByColorId(int colorId);
     }
 }
