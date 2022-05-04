@@ -3,58 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using Core.DataAccess;
+using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfColorDal : IEntityRepository<Color>
+    public class EfColorDal : EfEntityRepositoryBase<Color, CarRentalDBContext>, IColorDal
     {
-        public void Add(Color entity)
-        {
-            using (CarRentalDBContext context = new CarRentalDBContext())
-            {
-                var addedEntity = context.Entry(entity);
-                addedEntity.State = EntityState.Added;
-                context.SaveChanges();
-            }
-        }
+        //Buradaki CRUD metotları her bir EntityFramework katmanında aynı değişkenleri ve parametleri barındırdığı için--
+        //bu yapılar için bir generic class oluşturulabilir.
 
-        public void Delete(Color entity)
-        {
-            using (CarRentalDBContext context = new CarRentalDBContext())
-            {
-                var deletedEntity = context.Entry(entity);
-                deletedEntity.State = EntityState.Deleted;
-                context.SaveChanges();
-            }
-        }
-
-        public void Update(Color entity)
-        {
-            using (CarRentalDBContext context = new CarRentalDBContext())
-            {
-                var updatedEntity = context.Entry(entity);
-                updatedEntity.State = EntityState.Modified;
-                context.SaveChanges();
-            }
-        }
-
-        public Color Get(Expression<Func<Color, bool>> filter = null)
-        {
-            using (CarRentalDBContext context = new CarRentalDBContext())
-            {
-                return context.Set<Color>().SingleOrDefault(filter);
-            }
-        }
-
-        public List<Color> GetAll(Expression<Func<Color, bool>> filter = null)
-        {
-            using (CarRentalDBContext context = new CarRentalDBContext())
-            {
-                return filter == null ? context.Set<Color>().ToList() : context.Set<Color>().Where(filter).ToList();
-            }
-        }
+        //Belleğin hızlıca temizlenmesini sağlayan blok(dispose)
+        //IDisposable Pattern Implementation of C# -- Search
+        
     }
 }

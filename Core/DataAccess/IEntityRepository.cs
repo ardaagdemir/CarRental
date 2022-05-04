@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
-using Entities.Abstract;
+using Core.Entities;
 
-namespace DataAccess.Abstract
+namespace Core.DataAccess
 {
+    //BASE CRUP OPERATION
+
     //Generic Repository Design Pattern
     //Generic Constraint -- T Parametresini kısıtlamak gerekiyor. class=referans tip olduğunu belirtir. IEntity' ye ait bir new'lenen referans tip olabilir.
     public interface IEntityRepository <T> where T:class,IEntity, new()
