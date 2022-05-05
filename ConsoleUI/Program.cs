@@ -2,6 +2,7 @@
 using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
 using Business.Concrete;
+using Core.Utilities.Results;
 using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
@@ -41,16 +42,14 @@ namespace ConsoleUI
             //    Console.WriteLine(item.DailyPrice + " --" + item.Description + " --" + item.BrandId + "-- " + item.ColorId);
             //}
 
-            foreach (var c in carManager.GetCarDetails())
-            {
-                Console.WriteLine(c.CarName + "/" + c.BrandName + "/" + c.ModelYear);
-            }
-
-            //carManager.Add(new Car
+            //foreach (var c in carManager.GetCarDetails())
             //{
-            //    CarName = "AUDI A6", BrandId = 2, ColorId = 3, DailyPrice = 240000, ModelYear = 2019,
-            //    Description = "5 kapı sedan"
-            //});
+            //    Console.WriteLine(c.CarName + "/" + c.BrandName + "/" + c.ColorName + "/" + c.ModelYear);
+            //}
+
+            carManager.Add(new Car{CarName = "ar", ColorId = 2});
+            return; 
+
         }
     }
 }

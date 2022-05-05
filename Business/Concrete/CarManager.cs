@@ -5,6 +5,8 @@ using System.Data;
 using System.Text;
 using System.Threading.Channels;
 using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -16,6 +18,7 @@ namespace Business.Concrete
     {
         //GlobalVariable
         private ICarDal _carDal;
+
         //Constructor
         public CarManager(ICarDal carDal)
         {
@@ -38,36 +41,33 @@ namespace Business.Concrete
             return _carDal.GetAll(c => c.BrandId == colorId);
         }
 
-        public void Add(Car car)
+        public Car GetById(int carId)
         {
-            if (car.CarName.Length >= 2 && car.DailyPrice > 0 )
-            {
-                _carDal.Add(car);
-                
-            }
-            else
-            {
-                if (car.CarName.Length < 2)
-                {
-                    Console.WriteLine("Araba ismi minimum 2 karakter olmalıdır");
-                }
-                else
-                {
-                    Console.WriteLine("Araba günlük fiyatı 0' dan büyük olmalıdır.");
-                }
-            }
-            Console.WriteLine("Eklendi");
+            return _carDal.Get(c=> c.Id == carId);
         }
 
-        public void Delete(Car car)
+
+        public IResult Add(Car car)
+        {
+            if (car.CarName.Length < 2)
+            {
+                return new ErrorResult(Messages.CarNameInvalid);
+            }
+            _carDal.Add(car);
+            return new SuccessResult(Messages.CarAdded);
+        }
+        
+
+        public IResult Delete(Car car)
         {
             _carDal.Delete(car);
-            Console.WriteLine("Silindi");
+            return new Result(true,"Ürün silidi");
         }
 
-        public void Update(Car car)
+        public IResult Update(Car car)
         {
             _carDal.Update(car);
+            return new Result(true, "Ürün güncellendi.");
         }
 
         public List<CarDetailDto> GetCarDetails()

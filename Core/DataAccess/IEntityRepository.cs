@@ -20,7 +20,7 @@ namespace Core.DataAccess
         //Expression; id, name parametrelerini verebilmek için Linq ile kullanılacak
         //Expression-->Predicate??
         T Get(Expression<Func<T, bool>> filter = null);
-        List<T> GetAll(Expression<Func<T,bool>> filter=null); 
+        List<T> GetAll(Expression<Func<T, bool>> filter = null);
 
         //List<T> GetById(int Id);
         //Yukarıdaki refactoring sayesinde bu kodu kullanmaya gerek kalmaz.
