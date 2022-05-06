@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -16,14 +18,15 @@ namespace Business.Concrete
             _colorManager = colorDal;
         }
 
-        public List<Color> GetAll()
+
+        public IDataResult<List<Color>> GetAll()
         {
-            return _colorManager.GetAll();
+            return new SuccessDataResult<List<Color>>(_colorManager.GetAll(), Messages.CarListed);
         }
 
-        public List<Color> GetByColorId(int colorId)
+        public IDataResult<List<Color>> GetByColorId(int colorId)
         {
-            return _colorManager.GetAll(c => c.ColorId == colorId);
+            return new SuccessDataResult<List<Color>>(_colorManager.GetAll(c => c.ColorId == colorId));
         }
     }
 }

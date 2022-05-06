@@ -2,6 +2,7 @@
 using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
 using Business.Concrete;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
@@ -15,41 +16,49 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarTest();
+            //CarListTest();
 
-            //BrandTest();
+            //BrandAddTest();
+
+            //RentalAddTest();
         }
 
-        private static void BrandTest()
+        private static void RentalAddTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            rentalManager.Add();
+
+
+        }
+
+        private static void BrandAddTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            foreach (var brand in brandManager.GetAll())
-            {
-                Console.WriteLine(brand.BrandName);
-            }
 
-            foreach (var brand in brandManager.GetByBrandId(2))
+            Brand brand = new Brand()
             {
-                Console.WriteLine(brand.BrandName);
-            }
+                BrandName = "320i"
+            };
+            brandManager.Add(brand);
         }
 
-        private static void CarTest()
+        private static void CarListTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            //foreach (var item in carManager.GetAll())
-            //{
-            //    Console.WriteLine(item.DailyPrice + " --" + item.Description + " --" + item.BrandId + "-- " + item.ColorId);
-            //}
-
-            //foreach (var c in carManager.GetCarDetails())
-            //{
-            //    Console.WriteLine(c.CarName + "/" + c.BrandName + "/" + c.ColorName + "/" + c.ModelYear);
-            //}
-
-            carManager.Add(new Car{CarName = "ar", ColorId = 2});
-            return; 
-
+            
+            var result = carManager.GetCarDetails();
+            if (result.Success)
+            {
+                foreach (var c in result.Data)
+                {
+                    Console.WriteLine(c.CarName + "/" + c.BrandName + "/" + c.ColorName + "/" + c.ModelYear);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+            
         }
     }
 }

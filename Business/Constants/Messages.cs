@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,6 +13,7 @@ namespace Business.Constants
         public static string CarUpdated = "Araba güncellendi";
         public static string CarListed = "Araba listesi görüntülendi";
         public static string CarNameInvalid = "Araba ismi geçersiz";
-        
+
+        public static string MaintenanceTime = "Sistem bakımda";
     }
 }
