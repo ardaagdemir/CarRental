@@ -17,6 +17,8 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         //GlobalVariable
+        //CarManager' ın EfCarDal' a bağımlılığını ortadan kaldırmak için tanımlandı.(Constructor Injection)
+        //Loosely coupled
         private ICarDal _carDal;
 
         //Constructor
@@ -29,7 +31,7 @@ namespace Business.Concrete
         //Operation
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour==22)
+            if (DateTime.Now.Hour==23)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }

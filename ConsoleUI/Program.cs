@@ -18,8 +18,6 @@ namespace ConsoleUI
         {
             //CarListTest();
 
-            //BrandAddTest();
-
             //RentalAddTest();
         }
 
@@ -29,17 +27,6 @@ namespace ConsoleUI
             //var result = rentalManager.GetByBrandId();
 
 
-        }
-
-        private static void BrandAddTest()
-        {
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-
-            Brand brand = new Brand()
-            {
-                BrandName = "320i"
-            };
-            brandManager.Add(brand);
         }
 
         private static void CarListTest()
