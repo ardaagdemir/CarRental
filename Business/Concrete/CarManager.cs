@@ -25,9 +25,8 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+
         //Operation
-
-
         public IDataResult<List<Car>> GetAll()
         {
             if (DateTime.Now.Hour==22)
@@ -68,17 +67,17 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarAdded);
         }
         
-
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
-            return new Result(true,"Ürün silidi");
+            return new SuccessResult(Messages.CarDeleted);
+
         }
 
         public IResult Update(Car car)
         {
-            _carDal.Update(car);
-            return new Result(true, "Ürün güncellendi.");
+            _carDal.Delete(car);
+            return new SuccessResult(Messages.CarDeleted);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public IDataResult<List<Customer>> GetByBrandId(int customerId)
+        public IDataResult<List<Customer>> GetByCustomerId(int customerId)
         {
             throw new NotImplementedException();
         }

@@ -26,20 +26,20 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
         }
 
-        public IDataResult<List<Rental>> GetByBrandId(int rentalId)
+        public IDataResult<List<Rental>> GetByRentalId(int rentalId)
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(r => r.RentalId == rentalId));
         }
 
         public IResult Add(Rental rental) //Messages will change
         {
-            if (CheckReturnStatus(rental.CarId))
+            if (rental.ReturnDate == null && rental.CarId == null)
             {
-                _rentalDal.Add(rental);
-                return new SuccessResult(Messages.CarAdded);
+                Console.WriteLine(Messages.CarIdInvalid);
+                Console.WriteLine(Messages.TheCarHasNotBeenDeliveredYet);
             }
 
-            return new ErrorResult(Messages.CarDeleted);
+            return new SuccessResult(Messages.RentalAdded);
         }
 
 
@@ -51,21 +51,8 @@ namespace Business.Concrete
 
         public IResult Update(Rental rental) //Messages will change
         {
-            _rentalDal.Delete(rental);
+            _rentalDal.Update(rental);
             return new SuccessResult(Messages.CarUpdated);
         }
-
-
-        //
-        private bool CheckReturnStatus(int carId)
-            {
-                var rental = _rentalDal.Get(f => f.CarId == carId);
-                if (rental != null && rental.ReturnDate == null)
-                {
-                    return false;
-                }
-
-                return true;
-            }
     }
 }

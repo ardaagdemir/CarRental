@@ -18,6 +18,17 @@ namespace Business.Concrete
             _colorManager = colorDal;
         }
 
+        public IResult Add(Color color)
+        {
+            _colorManager.Add(color);
+            return new SuccessResult(Messages.ColorAdded);
+        }
+
+        public IResult Delete(Color color)
+        {
+            _colorManager.Delete(color);
+            return new SuccessResult(Messages.ColorDeleted);
+        }
 
         public IDataResult<List<Color>> GetAll()
         {
@@ -27,6 +38,12 @@ namespace Business.Concrete
         public IDataResult<List<Color>> GetByColorId(int colorId)
         {
             return new SuccessDataResult<List<Color>>(_colorManager.GetAll(c => c.ColorId == colorId));
+        }
+
+        public IResult Update(Color color)
+        {
+            _colorManager.Update(color);
+            return new SuccessResult(Messages.ColorUpdated);
         }
     }
 }

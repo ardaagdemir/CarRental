@@ -25,8 +25,8 @@ namespace ConsoleUI
 
         private static void RentalAddTest()
         {
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            rentalManager.Add();
+            //RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            //var result = rentalManager.GetByBrandId();
 
 
         }

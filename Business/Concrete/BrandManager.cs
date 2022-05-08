@@ -21,12 +21,12 @@ namespace Business.Concrete
 
         public IDataResult<List<Brand>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), Messages.BrandListed);
         }
 
         public IDataResult<List<Brand>> GetByBrandId(int brandId)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(b => b.BrandId == brandId), Messages.BrandListed);
         }
 
         public IResult Add(Brand brand)
