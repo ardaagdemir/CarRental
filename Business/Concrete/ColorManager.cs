@@ -11,38 +11,38 @@ namespace Business.Concrete
 {
     public class ColorManager : IColorService
     {
-        private IColorDal _colorManager;
+        private IColorDal _colorDal;
 
         public ColorManager(IColorDal colorDal)
         {
-            _colorManager = colorDal;
+            _colorDal = colorDal;
         }
 
         public IResult Add(Color color)
         {
-            _colorManager.Add(color);
+            _colorDal.Add(color);
             return new SuccessResult(Messages.ColorAdded);
         }
 
         public IResult Delete(Color color)
         {
-            _colorManager.Delete(color);
+            _colorDal.Delete(color);
             return new SuccessResult(Messages.ColorDeleted);
         }
 
         public IDataResult<List<Color>> GetAll()
         {
-            return new SuccessDataResult<List<Color>>(_colorManager.GetAll(), Messages.CarListed);
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.CarListed);
         }
 
         public IDataResult<List<Color>> GetByColorId(int colorId)
         {
-            return new SuccessDataResult<List<Color>>(_colorManager.GetAll(c => c.ColorId == colorId));
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(c => c.ColorId == colorId));
         }
 
         public IResult Update(Color color)
         {
-            _colorManager.Update(color);
+            _colorDal.Update(color);
             return new SuccessResult(Messages.ColorUpdated);
         }
     }
