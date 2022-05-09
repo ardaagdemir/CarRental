@@ -36,7 +36,7 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
 
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarAdded);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarListed);
         }
 
         public IDataResult<List<Car>> GetByBrandId(int brandId)
@@ -59,6 +59,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarListed);
         }
 
+        //[LogAspect]---> AOP--->>Bir metodun önünde, bir metodun sonunda veya bir metot hata verdiğinde çalışan kod parçacıkları AOP mimarisi ile yazılır.
         public IResult Add(Car car)
         {
             if (car.CarName.Length < 2)

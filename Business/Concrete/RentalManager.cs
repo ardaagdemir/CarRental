@@ -31,12 +31,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(r => r.RentalId == rentalId));
         }
 
-        public IResult Add(Rental rental) //Messages will change
+        public IResult Add(Rental rental)
         {
             if (rental.ReturnDate == null && rental.CarId == null)
             {
-                Console.WriteLine(Messages.CarIdInvalid);
-                Console.WriteLine(Messages.TheCarHasNotBeenDeliveredYet);
+                Console.WriteLine(Messages.CarIdInvalid + "/" + Messages.TheCarHasNotBeenDeliveredYet);
             }
 
             return new SuccessResult(Messages.RentalAdded);

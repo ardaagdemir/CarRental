@@ -11,6 +11,7 @@ namespace Core.Utilities.Results
 
         }
 
+        //Base default' u true'dur.
         public ErrorResult(string message) : base(false, message)
         {
 
