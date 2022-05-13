@@ -27,7 +27,6 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-
         //Operation
         public IDataResult<List<Car>> GetAll()
         {
@@ -59,10 +58,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarListed);
         }
 
-        //[LogAspect]---> AOP--->>Bir metodun önünde, bir metodun sonunda veya bir metot hata verdiğinde çalışan kod parçacıkları AOP mimarisi ile yazılır.
+        //[LogAspect]---> AOP
+        //Bir metodun önünde, bir metodun sonunda veya bir metot hata verdiğinde çalışan kod parçacıkları AOP mimarisi ile yazılır.
         public IResult Add(Car car)
         {
-            if (car.CarName.Length < 2)
+            if (car.CarName.Length < 2) 
             {
                 return new ErrorResult(Messages.CarNameInvalid);
             }

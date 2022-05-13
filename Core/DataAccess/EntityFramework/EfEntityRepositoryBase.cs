@@ -17,6 +17,9 @@ namespace Core.DataAccess.EntityFramework
         {
             //Buradaki CRUD metotları her bir EntityFramework katmanında aynı değişkenleri ve parametleri barındırdığı için--
             //bu yapılar için bir generic class oluşturulabilir.
+            //using bloğu her varlıktaki add, update, delete... operasyonları için yazılacağından ve alacağı DB parametresi aynı olduğundan generic class ile ilişkilendirilmelidir.
+            //Aynı şekilde her operasyonun parametresi bulunduğu varlığı temsil edeceğinden bu parametrelerde generic class ile ilişkilendirilmelidir.
+            //Bu class'ın yazılış amacı yukarıdaki gibidir.
 
             //Belleğin hızlıca temizlenmesini sağlayan blok(dispose)
             //IDisposable Pattern Implementation of C# -- Search

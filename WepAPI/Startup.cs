@@ -36,6 +36,7 @@ namespace WepAPI
             //.Net' in kendi IoC' si bizim yerimize classlarý otomatik olarak new'ler
             //Singleton--> Tüm bellekte bir adet CarManager oluþturur. Bütün instance'larý new'lemede kullanýr.
             //Singleton, içerisinde data tutulmayan operasyonlarda kullanýlýr. 
+            //Bu new'lemeler Controller' da yeni bir new'leme yapýlmasýnýn önüne geçmektedir ve baðlýlýðý azaltmaktadýr.
             services.AddSingleton<ICarService,CarManager>();
             services.AddSingleton<ICarDal, EfCarDal>();
 

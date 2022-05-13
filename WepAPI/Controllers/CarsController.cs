@@ -11,6 +11,11 @@ using Entities.Concrete;
 
 namespace WepAPI.Controllers
 {
+    //Entities, DataAccess,Core,Business katmanları oluşturulduktan sonra bu sistemi entegre edebilmek için bir aracı işleme ihtiyaç duyulmaktadır.
+    //Sistemleri kodlarla entegre eden yapının genel adı API'dir.
+    //Burada ASP.Net Wep Api alt yapısı kullanılmaktadır.
+    //Burada belirlenen controller ve AOP için verilen Log Aspect'ler ([HttpGet] gibi..) katmanların simülasyonu için çok önemlidir.
+
     [Route("api/[controller]")] //Route, nasıl istekte bulunacağını gösteren kısımdır. localhost../api/cars
     [ApiController] //Attribute---Annotation(for Java), Class' ın neye bağlı olduğunu belirtmek için kullanılır.
     public class CarsController : ControllerBase
@@ -61,7 +66,7 @@ namespace WepAPI.Controllers
             if (result.Success)
             {
                 //Get Request' de OK 20 http kodu ile çalışılır.
-                //If sorgusunda ki ok buradaki 200 OK' dir
+                //If sorgusunda ki 'Ok' buradaki 200 OK' dir
                 return Ok(result);
             }
 
@@ -84,7 +89,7 @@ namespace WepAPI.Controllers
 
         [HttpPost("add")]
         //Post Request'lerde sisteme ekleme için data vermek gereklidir.
-        //Data verilmediğinde 415Unsupported Media Type http kodunu alırız.
+        //Data verilmediğinde 415Unsupported Media Type http kodunu alınır.
         public IActionResult Add(Car car)
         {
             var result = _carService.Add(car);

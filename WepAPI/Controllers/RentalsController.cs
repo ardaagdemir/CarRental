@@ -53,7 +53,7 @@ namespace WepAPI.Controllers
                 return Ok(result);
             }
 
-            return BadRequest(result);
+            return BadRequest(result.Message);
         }
 
         [HttpDelete("delete")]
