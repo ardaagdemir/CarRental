@@ -16,7 +16,7 @@ namespace WepAPI.Controllers
     //Burada ASP.Net Wep Api alt yapısı kullanılmaktadır.
     //Burada belirlenen controller ve AOP için verilen Log Aspect'ler ([HttpGet] gibi..) katmanların simülasyonu için çok önemlidir.
 
-    [Route("api/[controller]")] //Route, nasıl istekte bulunacağını gösteren kısımdır. localhost../api/cars
+    [Route("api/[controller]")] //Route, nasıl istekte bulunacağını gösteren kısımdır. localhost../api/cars --- Postman--Test
     [ApiController] //Attribute---Annotation(for Java), Class' ın neye bağlı olduğunu belirtmek için kullanılır.
     public class CarsController : ControllerBase
     {
