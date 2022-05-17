@@ -8,6 +8,7 @@ using System.Threading.Channels;
 using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingconcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -65,9 +66,9 @@ namespace Business.Concrete
 
         //[LogAspect]---> AOP
         //Bir metodun önünde, bir metodun sonunda veya bir metot hata verdiğinde, çalışması istenilen kod parçacıkları AOP mimarisi ile yazılır.
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            ValidationTool.Validate(new CarValidator(), car);
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
