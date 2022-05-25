@@ -6,6 +6,7 @@ using System.Text;
 using IInterceptor = Castle.DynamicProxy.IInterceptor;
 
 
+//4
 //Interceptor --> araya giren, yol kesen...
 //Buradaki kod bloğu validation' ları attribute olarak business katmanına vermek için yazılmıştır.
 //Instance yaratabilmek için bir IoC Container gibi davranan projeye eklediğimiz Autofac' in hem Validate hem de burada kullanılan Interceptor özelliği vardır.

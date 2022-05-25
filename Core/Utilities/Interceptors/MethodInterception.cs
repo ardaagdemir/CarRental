@@ -5,6 +5,7 @@ namespace Core.Utilities.Interceptors
 {
     public abstract class MethodInterception : MethodInterceptionBaseAttribute
     {
+        //5
         //Hangi metot çalıştırılmak isteniyorsa burada parametre olarak verilir.
         //Örneğin OnBefore(CarValidator Add) gibi..
         protected virtual void OnBefore(IInvocation invocation) { }

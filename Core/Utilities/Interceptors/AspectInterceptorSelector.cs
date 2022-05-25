@@ -7,6 +7,7 @@ namespace Core.Utilities.Interceptors
 {
     public class AspectInterceptorSelector : IInterceptorSelector
     {
+        //6
         //IInterceptor array; Yazılan attribute ları tek tek bularak bir dizi haline getirmeye yarar.
         public IInterceptor[] SelectInterceptors(Type type, MethodInfo method, IInterceptor[] interceptors)
         {

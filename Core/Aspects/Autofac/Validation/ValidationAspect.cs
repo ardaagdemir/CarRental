@@ -9,11 +9,16 @@ using FluentValidation;
 
 namespace Core.Aspects.Autofac.Validation
 {
-    public class ValidationAspect : MethodInterception
+    //7
+    public class ValidationAspect : MethodInterception //Aspect
     {
         private Type _validatorType;
+
+        //Attribute = ValidationAspect
         public ValidationAspect(Type validatorType) //Attribute' lara tipler 'Type' ile atanır.
+        //Attribute'larda bu şekilde kısıtlamalar yapılması gerekmektedir.
         {
+            //defensice coding(savunma odaklı kodlama)
             if (!typeof(IValidator).IsAssignableFrom(validatorType)) //Kullanacak kişinin yazdığı şey bir Validator değil ise Exception hata mesajı fırlat.
             {
                 throw new System.Exception("Bu bir doğrulama sınıfı değil");
@@ -26,11 +31,20 @@ namespace Core.Aspects.Autofac.Validation
         //Yalnızca OnBefore çağırılmıştır.
         protected override void OnBefore(IInvocation invocation)
         {
-            var validator = (IValidator)Activator.CreateInstance(_validatorType); //Reflection --> çalışma anında başka bir şeyi çalıştırabilmeyi sağlar.
-            var entityType = _validatorType.BaseType.GetGenericArguments()[0]; //carValidator' ın çalışma tipini bul.
-            //invocation--> metot ---- carValidator'ın tipine eşit olan parametreleri bul
-            var entities = invocation.Arguments.Where(t => t.GetType() == entityType); //parametrelerini bul(ilgili methodun(add) parametrelerini bul)
-            foreach (var entity in entities)//parametreleri gez, ValidationTool kullanarak Validate et.
+            //Reflection(Activator.CreateInstance) --> Çalışma anında başka bir şeyi çalıştırabilmeyi sağlar. CarValidator' ın instance'ını oluştur.
+            //Bu instance' ı IValidator' da kullanılabilir hale getirir.
+            var validator = (IValidator)Activator.CreateInstance(_validatorType); 
+
+            //CarValidator' ın basetype'ını(AbstractValidator) ve onun çalıştığı Generic veri tipinden(Car) ilkini(0) bul.
+            var entityType = _validatorType.BaseType.GetGenericArguments()[0]; //CarValidator' ın çalışma tipini bul.
+
+            //invocation = metot
+            //Metodun(invocation), parametrelerine(Arguments) bak ve entityType' a denk gelen parametreleri(Add metoduna verilen parametreleri) bul.
+            //Bunun yazılmasının sebebi birden fazla parametre veya Validation olabileceği içindir.
+            var entities = invocation.Arguments.Where(t => t.GetType() == entityType);
+
+            //Parametreleri gez, ValidationTool kullanarak Validate et.
+            foreach (var entity in entities)
             {
                 ValidationTool.Validate(validator, entity);
             }

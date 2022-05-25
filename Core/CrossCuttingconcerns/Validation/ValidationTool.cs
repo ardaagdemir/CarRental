@@ -10,6 +10,7 @@ namespace Core.CrossCuttingconcerns.Validation
     //static bir sınıfın metotları da static olmalıdır
     public static class ValidationTool
     {
+        //3
         public static void Validate(IValidator validator, object entity)
         {
             //Validation yapılacağında çalışacak kod bloğudur.

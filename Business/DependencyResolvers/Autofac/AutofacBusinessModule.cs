@@ -13,6 +13,7 @@ using DataAccess.Concrete.EntityFramework;
 
 namespace Business.DependencyResolvers.Autofac
 {
+    //1
     public class AutofacBusinessModule : Module
     {
         //Class' ın oluşturulduğu ana klasör olan DependencyResolvers = Bağımlılık çözümleyici anlamına gelmektedir.
@@ -46,13 +47,13 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfUserDal>().As<IUserDal>();
 
             //Attribute'ları operasyona enjekte etmek için gerekli kod bloğu
-            //Çalışan uygulama içerisinde implement edilmiş interface'leri bul ve AspectInterceptorSelector' ı çağır.
+            //Çalışan uygulama içerisinde(GetExecutingAssembly) implement edilmiş interface'leri bul(AsImplementedInterfaces) ve AspectInterceptorSelector' ı çağır.
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
                 .EnableInterfaceInterceptors(new ProxyGenerationOptions()
                 {
-                    Selector = new AspectInterceptorSelector()
+                    Selector = new AspectInterceptorSelector() //Bütün sınıflar için bir Aspect oluşuturulup oluşturulmadığını kontrol eder.
                 }).SingleInstance();
         }
     }

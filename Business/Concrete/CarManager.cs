@@ -64,10 +64,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarListed);
         }
 
-        //[LogAspect]---> AOP
+        
         //Bir metodun önünde, bir metodun sonunda veya bir metot hata verdiğinde, çalışması istenilen kod parçacıkları AOP mimarisi ile yazılır.
         //Burada metot çalışmadan önce attribute kodları çalışacaktır. Şartlar sağlanıyorsa metot çalışır.
-        [ValidationAspect(typeof(CarValidator))]
+        //[ValidationAspect(typeof(CarValidator))]
+        
         public IResult Add(Car car)
         {
             _carDal.Add(car);
