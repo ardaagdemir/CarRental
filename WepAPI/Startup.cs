@@ -37,6 +37,7 @@ namespace WepAPI
             //Singleton--> Tüm bellekte bir adet CarManager oluþturur. Bütün instance'larý new'lemede kullanýr.
             //Singleton, içerisinde data tutulmayan operasyonlarda kullanýlýr. 
             //Bu new'lemeler Controller' da yeni bir new'leme yapýlmasýnýn önüne geçmektedir ve baðlýlýðý azaltmaktadýr.
+            //AutofacBusinessModule' da üretilen instance'larýn WepApi' de tanýmlanabilmesi için WebApi' nin Program.cs' ine gidilir.
 
             //services.AddSingleton<ICarService,CarManager>();
             //services.AddSingleton<ICarDal, EfCarDal>();

@@ -23,6 +23,7 @@ namespace Core.Aspects.Autofac.Validation
         }
 
         //MethodInterception içerisindeki OnBefore' da çalışacak kod burada belirlenmiştir.
+        //Yalnızca OnBefore çağırılmıştır.
         protected override void OnBefore(IInvocation invocation)
         {
             var validator = (IValidator)Activator.CreateInstance(_validatorType); //Reflection --> çalışma anında başka bir şeyi çalıştırabilmeyi sağlar.

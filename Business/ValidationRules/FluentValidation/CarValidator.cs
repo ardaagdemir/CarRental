@@ -8,9 +8,10 @@ namespace Business.ValidationRules.FluentValidation
 {
     public class CarValidator : AbstractValidator<Car>
     {
-        //Validation -->Örneğin Add metodunda eklenilmeye çalışılan nesnenin(car) iş kurallarına dahil edilmesi için yapısal olarak uygun olup olmadığına bakılan yapıdır.
+        //Validation -->Örneğin, Add metodunda eklenilmeye çalışılan nesnenin(car) iş kurallarına dahil edilmesi için yapısal olarak uygun olup olmadığına bakılan yapıdır.
         //CarManager'da belirtilen koşullar burada tanımlanacaktır.
         //Buradaki kurallar bir constructor içine yazılmaktadır.
+        //İş kodları bu kısımda olacaktır.
 
         public CarValidator()
         {

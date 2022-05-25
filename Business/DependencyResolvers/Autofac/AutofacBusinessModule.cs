@@ -15,13 +15,14 @@ namespace Business.DependencyResolvers.Autofac
 {
     public class AutofacBusinessModule : Module
     {
-        //Class' ın oluşturulduğu ana klasöt olan DependencyResolvers = Bağımlılık çözümleyici anlamına gelmektedir.
+        //Class' ın oluşturulduğu ana klasör olan DependencyResolvers = Bağımlılık çözümleyici anlamına gelmektedir.
         //Burada asıl amaç varolan nesnelerimizi new'leyerek WepApi'nin bağımlılığını en aza indirmektir.(Loosely Coupled)
         //WepAPI katmanında Starttup.cs içerisinde bağımlılığı azaltmak için nesnelerin birer instance' ı oluşturulmuştu.
         //Ancak projeye farklı bir Api hizmeti daha eklenebilmesi ve bunun efektif kullanılabilmesi için--
         //Startup.cs içerisinde newlenen ve ilişkilendirilen class'lar ve interface'ler burada tutulmalıdır.
         //Autofac teknolojisi bize bu instance üretimi için gerekli ortamı sağlamaktadır.
         //Bunun için oluşturduğumuz AutofacBusinessModule sınıfına Autofac eklentisinde bulunan "Module" abstract class'ı inherit edilmelidir.
+        //Load metodu override edilir. Uygulama hayata geçtiği zaman bu kısım çalışacaktır. Base' deki Load' ın çalışmasını engelliyoruz.
 
         protected override void Load(ContainerBuilder builder)
         {
