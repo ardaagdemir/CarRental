@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.Design;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Threading.Channels;
 using Business.Abstract;
@@ -10,6 +11,7 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingconcerns.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -64,17 +66,28 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarListed);
         }
 
-        
+
         //Bir metodun önünde, bir metodun sonunda veya bir metot hata verdiğinde, çalışması istenilen kod parçacıkları AOP mimarisi ile yazılır.
         //Burada metot çalışmadan önce attribute kodları çalışacaktır. Şartlar sağlanıyorsa metot çalışır.
-        //[ValidationAspect(typeof(CarValidator))]
-        
+        [ValidationAspect(typeof(CarValidator))]
+
         public IResult Add(Car car)
         {
+            //İş kuralı
+            IResult result = BusinessRules.Run(CheckIfCareNameExist(car.CarName),
+                CheckIfCarCountOfCategoryCorrect(car.BrandId));
+
+            if (result != null)
+            {
+                return result;
+            }
+
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
+
+
         }
-        
+
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
@@ -86,6 +99,30 @@ namespace Business.Concrete
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
+        }
+
+
+
+        //Birden fazla metotta kullanılabilir olması için bu şekilde yazılmalıdır.
+        private IResult CheckIfCarCountOfCategoryCorrect(int brandId)
+        {
+            var result = _carDal.GetAll(c => c.BrandId == brandId).Count;
+            if (result >= 10)
+            {
+                return new ErrorResult("Büyük olamaz");
+            }
+
+            return new SuccessResult();
+        }
+
+        private IResult CheckIfCareNameExist(string carName)
+        {
+            var result = _carDal.GetAll(c => c.CarName == carName).Any(); //Any = hiç var mı anlamına gelmektedir. Bool döndürür.
+            if (result)
+            {
+                return new ErrorResult(Messages.CarNameAlreadyExists);
+            }
+            return new SuccessResult();
         }
     }
 }
