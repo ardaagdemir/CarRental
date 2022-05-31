@@ -49,6 +49,5 @@ namespace Business.Constants
         public static string MaintenanceTime = "Sistem bakımda";
         public static string ErorAdded = "Araba Henüz Teslim Edilmedi.";
         public static string SuccesRanted = "Araba Kiralandı";
-        
     }
 }

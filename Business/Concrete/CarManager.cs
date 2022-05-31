@@ -102,7 +102,7 @@ namespace Business.Concrete
         }
 
 
-
+        //BusinessRules
         //Birden fazla metotta kullanılabilir olması için bu şekilde yazılmalıdır.
         private IResult CheckIfCarCountOfCategoryCorrect(int brandId)
         {

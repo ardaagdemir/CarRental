@@ -23,7 +23,7 @@ namespace Core.Utilities.Business
                 }
             }
 
-            return null;
+            return null;//Tüm kurallar başarılı ise null döndür.
 
         }
     }
