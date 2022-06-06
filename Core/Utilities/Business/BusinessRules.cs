@@ -5,9 +5,10 @@ using Core.Utilities.Results;
 
 namespace Core.Utilities.Business
 {
+    //8
     public class BusinessRules
     {
-        //params verildiğinde, Run içerisine istenilen kadar IRestul verilebilir paramatre olarak.
+        //params verildiğinde, Run içerisine paramatre olarak istenildiği kadar IRestul verilebilir.
         //Arka planda verilen bütün parametreleri IResult[]' e aktarır.
 
         public static IResult Run(params IResult[] logics)

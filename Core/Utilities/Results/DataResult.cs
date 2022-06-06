@@ -15,11 +15,13 @@ namespace Core.Utilities.Results
             Data = data;
         }
 
+        //Data yalnız başına gönderilemez, mutlaka bir success gönderilmesi gerekir.
         public DataResult(T data, bool success) : base(success)
         {
             Data = data;
         }
 
+        //Implementation
         public T Data { get; }
     }
 }

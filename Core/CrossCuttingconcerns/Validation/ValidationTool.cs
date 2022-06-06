@@ -5,9 +5,9 @@ using FluentValidation;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Core.CrossCuttingconcerns.Validation
+namespace Core.CrossCuttingConcerns.Validation
 {
-    //static bir sınıfın metotları da static olmalıdır
+    //Static bir sınıfın metotları da static olmalıdır
     public static class ValidationTool
     {
         //3

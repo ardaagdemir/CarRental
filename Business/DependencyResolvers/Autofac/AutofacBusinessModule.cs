@@ -19,17 +19,17 @@ namespace Business.DependencyResolvers.Autofac
     {
         //Class' ın oluşturulduğu ana klasör olan DependencyResolvers = Bağımlılık çözümleyici anlamına gelmektedir.
         //Burada asıl amaç varolan nesnelerimizi new'leyerek WepApi'nin bağımlılığını en aza indirmektir.(Loosely Coupled)
-        //WepAPI katmanında Starttup.cs içerisinde bağımlılığı azaltmak için nesnelerin birer instance' ı oluşturulmuştu.
+        //WepAPI katmanında Startup.cs içerisinde bağımlılığı azaltmak için nesnelerin birer instance' ı oluşturulmuştu.
         //Ancak projeye farklı bir Api hizmeti daha eklenebilmesi ve bunun efektif kullanılabilmesi için--
         //Startup.cs içerisinde newlenen ve ilişkilendirilen class'lar ve interface'ler burada tutulmalıdır.
         //Autofac teknolojisi bize bu instance üretimi için gerekli ortamı sağlamaktadır.
         //Bunun için oluşturduğumuz AutofacBusinessModule sınıfına Autofac eklentisinde bulunan "Module" abstract class'ı inherit edilmelidir.
-        //Load metodu override edilir. Uygulama hayata geçtiği zaman bu kısım çalışacaktır. Base' deki Load' ın çalışmasını engelliyoruz.
+        //Load metodu override edilir. Uygulama hayata geçtiği zaman bu kısım çalışacaktır. Base' deki Load' ın çalışması override ile engellenir.
 
         protected override void Load(ContainerBuilder builder)
         {
             //Startup.cs' deki services.AddSingleton<>'a karşılık gelmektedir.
-            builder.RegisterType<CarManager>().As<ICarService>().SingleInstance(); //IcarService istenirse ona bir CarManager instance' ı ver anlamına gelir.
+            builder.RegisterType<CarManager>().As<ICarService>().SingleInstance(); //ICarService istenirse ona bir CarManager instance' ı ver anlamına gelir.
             builder.RegisterType<EfCarDal>().As<ICarDal>().SingleInstance();
 
             builder.RegisterType<BrandManager>().As<IBrandService>().SingleInstance();

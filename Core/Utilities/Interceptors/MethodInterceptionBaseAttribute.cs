@@ -18,7 +18,7 @@ namespace Core.Utilities.Interceptors
     //Attribute' lar ilgili metodun üzerine yazılır.
     
     //Attribute hem class' a hem metot' a uygulanabilir, Birden çok class veya metotla kullanılabilir(AllowMultiple), Class ve metotlara inherit edilebilir(Inherited)
-    //Bir loglama durumunda hem veritabanına he mde bir dosyaya loglama yapabilmek için AllowMultiple yazılmalıdır.
+    //Bir loglama durumunda hem veritabanına hem de bir dosyaya loglama yapabilmek için AllowMultiple yazılmalıdır.
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
     public abstract class MethodInterceptionBaseAttribute : Attribute, IInterceptor
     {

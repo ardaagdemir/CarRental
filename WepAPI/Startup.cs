@@ -33,8 +33,8 @@ namespace WepAPI
             services.AddControllers();
 
             //ASP.Net Core Web API --- IoC(Inversion of Control)
-            //.Net' in kendi IoC' si bizim yerimize classlarý otomatik olarak new'ler
-            //Singleton--> Tüm bellekte bir adet CarManager oluþturur. Bütün instance'larý new'lemede kullanýr.
+            //.Net' in kendi IoC Container' ý bizim yerimize classlarý otomatik olarak new'ler.
+            //Singleton--> Tüm bellekte bir adet CarManager oluþturur. Bütün instance'larý yaratmada kullanýr.
             //Singleton, içerisinde data tutulmayan operasyonlarda kullanýlýr. 
             //Bu new'lemeler Controller' da yeni bir new'leme yapýlmasýnýn önüne geçmektedir ve baðlýlýðý azaltmaktadýr.
             //AutofacBusinessModule' da üretilen instance'larýn WepApi' de tanýmlanabilmesi için WebApi' nin Program.cs' ine gidilir.

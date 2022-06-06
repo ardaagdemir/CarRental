@@ -8,7 +8,7 @@ namespace Core.Utilities.Results
     {
         public ErrorResult() : base(false)
         {
-
+            //Defaul constructor
         }
 
         //Base default' u true'dur.

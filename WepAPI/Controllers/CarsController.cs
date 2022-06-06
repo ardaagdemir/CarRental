@@ -32,6 +32,7 @@ namespace WepAPI.Controllers
         }
 
         [HttpGet("getbycolorid")]
+        //IActionResult --> Asp .Net Core Mvc 
         public IActionResult GetByColorId(int colorId)
         {
             var result = _carService.GetByColorId(colorId);
@@ -58,10 +59,11 @@ namespace WepAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
+            //-----!!!!-----
             //Dependency chain
             //Burada bir class'ı new' leyerek bağımlı olmamak için IoC(Inversion of Control) Container isimli bir yapıdan yararlanılması gerekmektedir.
-            //IoC bizim için arka planda verilen class'ları new'ler ve buradaki bağımlılığı azaltmış olur.
-            //Startup.cs' de IoC yapısı görülmektedir.
+            //IoC Container bizim için arka planda verilen class'ları new'ler ve buradaki bağımlılığı azaltmış olur.
+            //Startup.cs' de IoC yapısı görülmektedir. -->
             var result = _carService.GetAll();
             if (result.Success)
             {
@@ -88,7 +90,7 @@ namespace WepAPI.Controllers
 
 
         [HttpPost("add")]
-        //Post Request'lerde sisteme ekleme için data vermek gereklidir.
+        //Post Request'lerde sisteme ekleme için 'data' vermek gereklidir.
         //Data verilmediğinde 415Unsupported Media Type http kodunu alınır.
         public IActionResult Add(Car car)
         {

@@ -16,13 +16,13 @@ namespace Core.DataAccess
         void Delete(T entity);
         void Update(T entity);
 
-        //GetAll, GetById metotlara verilen parametreler içerisinden seçim yapmaya yarar
-        //Expression; id, name parametrelerini verebilmek için Linq ile kullanılacak
+        //GetAll, GetById metotlara verilen parametreler içerisinden seçim yapmaya yarar.
+        //Expression; id, name parametrelerini verebilmek için Linq ile kullanılacak.
         //Expression-->Predicate??
         T Get(Expression<Func<T, bool>> filter = null);
         List<T> GetAll(Expression<Func<T, bool>> filter = null);
 
-        //List<T> GetById(int Id);
+        //List<T> GetById(int Id);  =  T Get(Expressions<Func<T, bool>> filter = null;)
         //Yukarıdaki refactoring sayesinde bu kodu kullanmaya gerek kalmaz.
     }
 }

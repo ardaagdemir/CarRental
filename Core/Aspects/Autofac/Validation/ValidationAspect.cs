@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Castle.DynamicProxy;
-using Core.CrossCuttingconcerns.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using FluentValidation;
 
 namespace Core.Aspects.Autofac.Validation
@@ -31,8 +31,8 @@ namespace Core.Aspects.Autofac.Validation
         //Yalnızca OnBefore çağırılmıştır.
         protected override void OnBefore(IInvocation invocation)
         {
-            //Reflection(Activator.CreateInstance) --> Çalışma anında başka bir şeyi çalıştırabilmeyi sağlar. CarValidator' ın instance'ını oluştur.
-            //Bu instance' ı IValidator' da kullanılabilir hale getirir.
+            //Reflection(Activator.CreateInstance) --> Çalışma anında başka bir şeyi çalıştırabilmeyi sağlar. 
+            //--> CarValidator' ın instance'ını oluştur. Bu instance' ı IValidator' da kullanılabilir hale getirir.
             var validator = (IValidator)Activator.CreateInstance(_validatorType); 
 
             //CarValidator' ın basetype'ını(AbstractValidator) ve onun çalıştığı Generic veri tipinden(Car) ilkini(0) bul.
