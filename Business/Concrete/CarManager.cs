@@ -70,7 +70,6 @@ namespace Business.Concrete
         //Bir metodun önünde, bir metodun sonunda veya bir metot hata verdiğinde, çalışması istenilen kod parçacıkları AOP mimarisi ile yazılır.
         //Burada metot çalışmadan önce attribute kodları çalışacaktır. Şartlar sağlanıyorsa metot çalışır.
         [ValidationAspect(typeof(CarValidator))]
-
         public IResult Add(Car car)
         {
             //İş kuralı
