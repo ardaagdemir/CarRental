@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Concrete.EntityFramework
+﻿namespace Entities.Concrete
 {
     public class OperationClaim
     {

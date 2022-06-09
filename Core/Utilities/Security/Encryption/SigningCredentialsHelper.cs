@@ -14,7 +14,7 @@ namespace Core.Utilities.Security.Encryption
         //SigningCredentials, JWT servislerinin (WepApi ' ın kullanabileceği) oluşturulabilmesi için credentials(kullanıcı adı, parola..) oluşturmaya yarar.
         public static SigningCredentials CreateSigningCredentials(SecurityKey securityKey) 
         {
-            //SecurityKey' in imazalama nesnesini döndürmeye yarar
+            //SecurityKey' in imazalama nesnesini döndürmeye yarar.
             //Bir hashleme işlemi yapılacaktır.
             //Anahtar olarak securityKey parametresini kullan, şifreleme(algoritma) olarak da güvenlik algoritmalarından HmacSha512' yi kullan.
             return new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512Signature);

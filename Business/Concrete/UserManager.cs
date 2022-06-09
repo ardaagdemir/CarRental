@@ -29,7 +29,7 @@ namespace Business.Concrete
 
         public IDataResult<List<User>> GetByUserId(int userId)
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(u => u.UserId == userId), Messages.UserListed);
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(u => u.Id == userId), Messages.UserListed);
         }
 
         [ValidationAspect(typeof(UserValidator))]
