@@ -6,13 +6,14 @@ using System.Security.Claims;
 using System.Text;
 using Core.Extensions;
 using Core.Utilities.Security.Encryption;
-using Entities.Concrete;
+using Core.Entities.Concrete;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Core.Utilities.Security.JWT
 {
     //6
+    //JwtHelper oluşturulan mimari içerisindedir. Bu yüzden Configuration injection yapılabildi.
     public class JwtHelper : ITokenHelper
     {
         public IConfiguration Configuration { get; }//appsettings.json' da verilen değerleri okumaya yarar(get)

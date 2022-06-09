@@ -5,7 +5,7 @@ using System.Text;
 using Core.Entities;
 using Newtonsoft.Json.Converters;
 
-namespace Entities.Concrete
+namespace Core.Entities.Concrete
 {
     public class User : IEntity
     {

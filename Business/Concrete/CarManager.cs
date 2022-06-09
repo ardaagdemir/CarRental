@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Channels;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -70,6 +71,7 @@ namespace Business.Concrete
         //Bir metodun önünde, bir metodun sonunda veya bir metot hata verdiğinde, çalışması istenilen kod parçacıkları AOP mimarisi ile yazılır.
         //Burada metot çalışmadan önce attribute kodları çalışacaktır. Şartlar sağlanıyorsa metot çalışır.
         [ValidationAspect(typeof(CarValidator))]
+        [SecuredOperation("product.add, admin")]
         public IResult Add(Car car)
         {
             //İş kuralı

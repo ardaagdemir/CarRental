@@ -1,6 +1,7 @@
 ﻿using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constants
@@ -49,5 +50,7 @@ namespace Business.Constants
         public static string MaintenanceTime = "Sistem bakımda";
         public static string ErorAdded = "Araba Henüz Teslim Edilmedi.";
         public static string SuccesRanted = "Araba Kiralandı";
+        public static string AuthorizationDenied = "";
+
     }
 }
