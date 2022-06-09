@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Core.Utilities.Security.Encryption
 {
+    //3
     //İmzalama
     public class SigningCredentialsHelper
     {

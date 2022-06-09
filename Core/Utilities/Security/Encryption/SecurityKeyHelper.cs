@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Core.Utilities.Security.Encryption
 {
+    //2
     //Şifreleme olan sistemlerde her şeyin bir byte[] formatında olması gerekmektedir.
     //Yani bunların ASP.Net' in JWT servislerinin anlayacağı hale getirilmesi gerekmektedir.
     public class SecurityKeyHelper
