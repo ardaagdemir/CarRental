@@ -35,7 +35,7 @@ namespace Business.Concrete
             carImage.ImagePath = _fileHelper.Upload(file, PathConstants.ImagesPath);
             carImage.Date = DateTime.Now; //Tarih otomatik olarak sistem tarafından atanacaktır.
             _carImageDal.Add(carImage);
-            return new SuccessResult("Resim başarıyla yüklendi.");
+            return new SuccessResult(Messages.ImageSuccessAdded);
         }
 
 

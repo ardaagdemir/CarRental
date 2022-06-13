@@ -36,6 +36,8 @@ namespace Business.BusinessAspects.Autofac
 
         }
 
+        //İlgili metodun önünde çalıştır. --> OnBefore
+        //Kullanıcının claim rollerini bul(roleClaims), rolleri gez(foreach), eğer claimlerde ilgili role varsa(if) metodu çalıştırmaya devam et(return)
         protected override void OnBefore(IInvocation invocation)
         {
             var roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();

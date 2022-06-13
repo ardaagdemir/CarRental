@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
+using Core.Entities.Concrete;
 
 namespace Business.Constants
 {
@@ -50,7 +51,14 @@ namespace Business.Constants
         public static string MaintenanceTime = "Sistem bakımda";
         public static string ErorAdded = "Araba Henüz Teslim Edilmedi.";
         public static string SuccesRanted = "Araba Kiralandı";
-        public static string AuthorizationDenied = "";
+        public static string AuthorizationDenied = "Yetkiniz yok.";
 
+        public static string UserRegistered = "Kayıt olundu.";
+        public static string UserNotFound = "Kullanıcı bulunamadı.";
+        internal static string PasswordError = "Yanlış parola.";
+        internal static string UserAlreadyExists = "Kullanıcı zaten var.";
+        internal static string AccessTokenCreated = "İstek oluşturuldu.";
+        internal static string SuccessfulLogin = "Giriş Başarılı.";
+        internal static string ImageSuccessAdded;
     }
 }
