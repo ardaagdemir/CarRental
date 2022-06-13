@@ -62,14 +62,14 @@ namespace Core.Utilities.Security.JWT
 
         //Yukarıda kullanıcının kullanıcı bilgilerini ve claimlerini parametre alarak bir adet Claim listesi oluştur.
         //IEnumerable, List<>' in base' idir.
-        private IEnumerable<Claim> SetClaims(User user, List<OperationClaim> operationClaims)
+        private List<Claim> SetClaims(User user, List<OperationClaim> operationClaims)
         {
             //Var olan bir class'a yeni metotlar eklenebilir. Bunun adı 'Extension' (genişletmek)'dır.
             var claims = new List<Claim>();
             claims.AddNameIdentifier(user.Id.ToString());
             claims.AddEmail(user.Email);
             claims.AddName($"{user.FirstName} {user.LastName}");
-            claims.AddRoles(operationClaims.Select(c => c.Name).ToArray());
+            claims.AddRoles(operationClaims.Select(oc => oc.Name).ToArray());
 
             return claims;
         }

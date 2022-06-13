@@ -23,5 +23,7 @@ namespace Core.Utilities.Results
 
         //Implementation
         public T Data { get; }
+        public byte[] PasswordSalt { get; set; }
+        public byte[] PasswordHash { get; set; }
     }
 }

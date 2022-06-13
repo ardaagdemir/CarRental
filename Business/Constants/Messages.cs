@@ -53,12 +53,23 @@ namespace Business.Constants
         public static string SuccesRanted = "Araba Kiralandı";
         public static string AuthorizationDenied = "Yetkiniz yok.";
 
-        public static string UserRegistered = "Kayıt olundu.";
         public static string UserNotFound = "Kullanıcı bulunamadı.";
-        internal static string PasswordError = "Yanlış parola.";
-        internal static string UserAlreadyExists = "Kullanıcı zaten var.";
-        internal static string AccessTokenCreated = "İstek oluşturuldu.";
-        internal static string SuccessfulLogin = "Giriş Başarılı.";
-        internal static string ImageSuccessAdded;
+        public static string PasswordError = "Parola yanlış.";
+        public static string SuccessfulLogin = "Giriş başarılı.";
+        public static string UserAlreadyExists = "Kullanıcı mevcut.";
+        public static string UserRegistered = "Kayıt başarılı.";
+        public static string AccessTokenCreated = "Erişim belirteci oluşturuldu.";
+        public static string ImageSuccessAdded;
+
+
+        public static string PaymentInformationSuccessfullySaved;
+        public static string PaymentDeleted;
+        public static string PaymentListed;
+        public static string PaymentGeted;
+        public static string ThisCardIsAlreadyRegisteredForThisCustomer;
+        public static string PaymentSuccessful;
+        public static string PaymentUpdated;
+        public static string CardNumberMustConsistOfLettersOnly;
+        public static string LastTwoDigitsOfYearMustBeEntered;
     }
 }

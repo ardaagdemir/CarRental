@@ -86,9 +86,11 @@ namespace WepAPI
                 
             }
 
+            //Middle wear --> ASP.Net yaþam döngüsünde hangi yapýlarýn hangi sýrayla devreye gireceðinin belirlendiði kýsýmdýr.
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseStaticFiles();
 

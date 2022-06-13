@@ -14,7 +14,5 @@ namespace Core.Utilities.Results
     public interface IDataResult<T> : IResult
     {
         T Data { get; }
-        byte[] PasswordSalt { get; set; }
-        byte[] PasswordHash { get; set; }
     }
 }

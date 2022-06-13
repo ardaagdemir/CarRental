@@ -4,6 +4,7 @@ using System.Text;
 using Autofac;
 using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Concrete;
 using Castle.DynamicProxy;
 using Core.Utilities.Helpers.FileHelpers;
@@ -45,6 +46,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<RentalManager>().As<IRentalService>().SingleInstance();
             builder.RegisterType<EfRentalDal>().As<IRentalDal>().SingleInstance();
 
+            builder.RegisterType<PaymentManager>().As<IPaymentService>();
+            builder.RegisterType<EfPaymentDal>().As<IPaymentDal>();
+
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();
 
@@ -53,6 +57,7 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<CarImageManager>().As<ICarImageService>().SingleInstance();
             builder.RegisterType<EfCarImageDal>().As<ICarImageDal>().SingleInstance();
+
             builder.RegisterType<FileHelperManager>().As<IFileHelper>().SingleInstance();
 
             //Attribute'ları operasyona enjekte etmek için gerekli kod bloğu
