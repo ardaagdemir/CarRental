@@ -91,7 +91,7 @@ namespace WepAPI.Controllers
 
         [HttpPost("add")]
         //Post Request'lerde sisteme ekleme için 'data' vermek gereklidir.
-        //Data verilmediğinde 415Unsupported Media Type http kodunu alınır.
+        //Data verilmediğinde 415Unsupported Media Type http kodu alınır.
         public IActionResult Add(Car car)
         {
             var result = _carService.Add(car);

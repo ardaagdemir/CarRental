@@ -18,7 +18,7 @@ namespace Core.Aspects.Autofac.Validation
         public ValidationAspect(Type validatorType) //Attribute' lara tipler 'Type' ile atanır.
         //Attribute'larda bu şekilde kısıtlamalar yapılması gerekmektedir.
         {
-            //defensice coding(savunma odaklı kodlama)
+            //defensive coding(savunma odaklı kodlama)
             if (!typeof(IValidator).IsAssignableFrom(validatorType)) //Kullanacak kişinin yazdığı şey bir Validator değil ise Exception hata mesajı fırlat.
             {
                 throw new System.Exception("Bu bir doğrulama sınıfı değil");

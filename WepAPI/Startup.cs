@@ -60,20 +60,6 @@ namespace WepAPI
             //AutofacBusinessModule' da üretilen instance'larýn WepApi' de tanýmlanabilmesi için WebApi' nin Program.cs' ine gidilir.
 
             //services.AddSingleton<ICarService,CarManager>();
-            //services.AddSingleton<ICarDal, EfCarDal>();
-            //services.AddSingleton<IUserService, UserManager>();
-            //services.AddSingleton<IUserDal, EfUserDal>();
-            //services.AddSingleton<IBrandService, BrandManager>();
-            //services.AddSingleton<IBrandDal, EfBrandDal>();
-            //services.AddSingleton<IColorService, ColorManager>();
-            //services.AddSingleton<IColorDal, EfColorDal>();
-            //services.AddSingleton<ICustomerService, CustomerManager>();
-            //services.AddSingleton<ICustomerDal, EfCustomerDal>();
-            //services.AddSingleton<IRentalService, RentalManager>();
-            //services.AddSingleton<IRentalDal, EfRentalDal>();
-
-            //Buradaki metotlar business katmanýnda dependency resolvers altýnda toplanmýþtýr.
-            //Açýklamalar için oraya bakýlmalýdýr.
 
         }
 

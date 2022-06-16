@@ -8,7 +8,7 @@ namespace Core.Utilities.Business
     //8
     public class BusinessRules
     {
-        //params verildiğinde, Run içerisine paramatre olarak istenildiği kadar IRestul verilebilir.
+        //params verildiğinde, Run içerisine paramatre olarak istenildiği kadar IResult verilebilir.
         //Arka planda verilen bütün parametreleri IResult[]' e aktarır.
 
         public static IResult Run(params IResult[] logics)
