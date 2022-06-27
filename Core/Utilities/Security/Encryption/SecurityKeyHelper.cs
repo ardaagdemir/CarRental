@@ -10,8 +10,9 @@ namespace Core.Utilities.Security.Encryption
     //Yani bunların ASP.Net' in JWT servislerinin anlayacağı hale getirilmesi gerekmektedir.
     public class SecurityKeyHelper
     {
-        //WepApi - appsettings.json klasöründe JWT formatında yazmış olduğumuz SecurityKey burada kullanılmaktadır.
-        public static SecurityKey CreateSecurityKey(string securityKey) //securityKey - parametre appsettings.json' daki SecurityKey' e karşılık gelen yazdığımız string ifadedir.
+        //WepApi - appsettings.json klasöründe JWT formatında yazılan SecurityKey burada kullanılmaktadır.
+        //Buradaki SecurityKey olarak dönen değer appsettings.json' daki belirlenen SecurityKey değeridir.
+        public static SecurityKey CreateSecurityKey(string securityKey) //securityKey - appsetting.json' daki SecurityKey' e karşılık gelen değerdir.
         {
             return new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securityKey)); //Anahatarlar, simetrik ve asimetrik anahtar olarak ayrılmaktadır.
         }

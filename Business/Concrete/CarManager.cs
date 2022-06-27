@@ -22,12 +22,11 @@ using ValidationException = FluentValidation.ValidationException;
 
 namespace Business.Concrete
 {
-    //BusinessCode
+    
     public class CarManager : ICarService
     {
-        //GlobalVariable
-        //CarManager' ın EfCarDal' a bağımlılığını ortadan kaldırmak için tanımlandı.(Constructor Injection)
-        //Loosely coupled
+        //Global Variable
+        //LooselyCoupled
         private ICarDal _carDal;
 
         //Constructor
@@ -76,7 +75,6 @@ namespace Business.Concrete
         [SecuredOperation("product.add, admin")]
         public IResult Add(Car car)
         {
-            //İş kuralı
             IResult result = BusinessRules.Run(CheckIfCareNameExist(car.CarName),
                 CheckIfCarCountOfCategoryCorrect(car.BrandId));
 
@@ -104,7 +102,6 @@ namespace Business.Concrete
 
 
         //BusinessRules
-        //Birden fazla metotta kullanılabilir olması için bu şekilde yazılmalıdır.
         private IResult CheckIfCarCountOfCategoryCorrect(int brandId)
         {
             var result = _carDal.GetAll(c => c.BrandId == brandId).Count;
