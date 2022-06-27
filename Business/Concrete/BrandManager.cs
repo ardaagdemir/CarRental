@@ -31,7 +31,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(b => b.BrandId == brandId), Messages.BrandListed);
         }
 
-        [ValidationAspect(typeof(BrandValidator))]
+        
         public IResult Add(Brand brand)
         {
             _brandDal.Add(brand);

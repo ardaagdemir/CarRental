@@ -70,6 +70,8 @@ namespace Business.Concrete
 
         //Bir metodun önünde, bir metodun sonunda veya bir metot hata verdiğinde, çalışması istenilen kod parçacıkları AOP mimarisi ile yazılır.
         //Burada metot çalışmadan önce attribute kodları çalışacaktır. Şartlar sağlanıyorsa metot çalışır.
+        //Claim = product.add, admin...
+        //Bir operasyon yetki gerektiriyorsa API tabanlı yapılarda JWT adında bir yapı kullanılır.
         [ValidationAspect(typeof(CarValidator))]
         [SecuredOperation("product.add, admin")]
         public IResult Add(Car car)

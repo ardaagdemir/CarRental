@@ -18,6 +18,8 @@ namespace WepAPI.Controllers
         {
             _carImageService = carImageService;
         }
+
+
         [HttpPost("add")]
         public IActionResult Add([FromForm] IFormFile file, [FromForm] CarImage carImage)
         {
@@ -28,6 +30,7 @@ namespace WepAPI.Controllers
             }
             return BadRequest(result);
         }
+
         [HttpPost("delete")]
         public IActionResult Delete(CarImage carImage)
         {
@@ -39,6 +42,7 @@ namespace WepAPI.Controllers
             }
             return BadRequest(result);
         }
+
         [HttpPost("update")]
         public IActionResult Update([FromForm] IFormFile file, [FromForm] CarImage carImage)
         {
@@ -49,6 +53,7 @@ namespace WepAPI.Controllers
             }
             return BadRequest(result);
         }
+
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
@@ -59,6 +64,7 @@ namespace WepAPI.Controllers
             }
             return BadRequest(result);
         }
+
         [HttpGet("getbycarıd")]
         public IActionResult GetByCarId(int carId)
         {
@@ -69,6 +75,7 @@ namespace WepAPI.Controllers
             }
             return Ok(result);
         }
+
         [HttpGet("getbyimageid")]
         public IActionResult GetByImageId(int imageId)
         {
