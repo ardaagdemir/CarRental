@@ -21,10 +21,9 @@ namespace Core.Utilities.Security.Hashing
 
                 //Salting --> Kullanıcının girdiği parolayı(hash edilen password) güçlendirmeye yarar.
                 //Encrypt edilen veri decrypt edilmelidir. Çözebilmek için bu verinin ne ile ve nasıl şifrelendiği bilinmelidir.
-                //Bunun için ''key'' denilen bir anahtar kelime kullanılabilir.
+                //Bunun için 'key' denilen bir anahtar kelime kullanılabilir.
                 passwordSalt = hmac.Key;//Her kullanıcı için bir key oluşturulur.
-                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password)); //Burada verilecek olan password değerinin bir byte[] tipinde olması gerekir.
-                                                                                        //O yüzden Encoding sınıfından yararlanılır.
+                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password)); //Burada verilecek olan password değerinin bir byte[] tipinde olması gerekir. O yüzden Encoding sınıfından yararlanılır.
 
                 //Yukarıdaki kodlar verilen bir password değerinin salt ve hash değerini oluşturmaya yarar.
             }
@@ -35,7 +34,7 @@ namespace Core.Utilities.Security.Hashing
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt)) //Burada doğrulama yapılacağı için metot bizden bir key(passwordSalt) değeri istemektedir.
             {
-                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password)); //Kullanıcı kayıt olup parolasını(passwordHash) yukarıdaki gibi oluşturduktan sonra giriş yapmaya                                                                                   çalıştığında tekrar giriş yaptığı parolanın(computedHash) oluşturulması gerekmektedir.
+                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password)); //Kullanıcı kayıt olup parolasını(passwordHash) yukarıdaki gibi oluşturduktan sonra giriş yapmaya çalıştığında tekrar giriş yaptığı parolanın(computedHash) oluşturulması gerekmektedir.
 
                 //computedHash ile passwordSalt karşılaştırılarak doğrulanmalıdır.
                 for (int i = 0; i < computedHash.Length; i++)

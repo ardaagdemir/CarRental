@@ -12,6 +12,7 @@ using Entities.DTOs;
 
 namespace Business.Concrete
 {
+    //11
     //AuthService -->  Kayıt olmak, giriş yapmak, çıkış yapmak, token üreterek istekte bulunmak gibi operasyonlardan sorumludur.
     public class AuthManager : IAuthService
     {
@@ -46,20 +47,20 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(user, Messages.UserAdded);
         }
 
-        public IDataResult<User> Login(UserForLoginDto userForLoginDto, string password)
+        public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {
             var userToCheck = _userService.GetByMail(userForLoginDto.Email);
-            if (userToCheck.Data == null)
+            if (userToCheck == null)
             {
                 return new ErrorDataResult<User>(Messages.UserNotFound);
             }
 
-            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.Data.PasswordHash, userToCheck.Data.PasswordSalt))
+            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt))
             {
                 return new ErrorDataResult<User>(Messages.PasswordError);
             }
 
-            return new SuccessDataResult<User>(userToCheck.Data, Messages.SuccessfulLogin);
+            return new SuccessDataResult<User>(userToCheck, Messages.UserAdded);
         }
 
         public IResult UserExists(string email)
@@ -74,7 +75,7 @@ namespace Business.Concrete
         public IDataResult<AccessToken> CreateAccessToken(User user)
         {
             var operationClaims = _userService.GetClaims(user);
-            var accessToken = _tokenHelper.CreateToken(user, operationClaims.Data);
+            var accessToken = _tokenHelper.CreateToken(user, operationClaims);
             return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
         }
     }

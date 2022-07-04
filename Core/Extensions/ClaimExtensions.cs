@@ -7,12 +7,13 @@ using System.Text;
 
 namespace Core.Extensions
 {
+    //8
     public static class ClaimExtensions
     {
         //Bir extension yazabilmek için hem metodun hem de class' ın static olması zorunludur.
         public static void AddEmail(this ICollection<Claim> claims, string email)
         {
-            //this keyword' ü, ICollection<Calim>(.Net içerisindeki hazır nesneler) içerisine extend etmek genişletmek anlamına gelir. Yani burada string tipinde bir emal değişkeni ekle anlamına gelmektedir.
+            //this keyword' ü, ICollection<Calim>(.Net içerisindeki hazır nesneler) içerisine extend etmek genişletmek anlamına gelir. Yani burada string tipinde bir email değişkeni ekle anlamına gelmektedir.
             claims.Add(new Claim(JwtRegisteredClaimNames.Email, email));
         }
 

@@ -35,6 +35,9 @@ namespace WepAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            //services.AddCors();
+
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -76,11 +79,13 @@ namespace WepAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
             app.UseAuthentication();
 
             app.UseStaticFiles();
 
-            app.UseAuthorization();
+            app.UseAuthorization(); 
+            
 
             app.UseEndpoints(endpoints =>
             {

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core.Utilities.Security.JWT
 {
-    //7
+    //6
     //Helper Class
     public class TokenOptions
     {

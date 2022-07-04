@@ -8,9 +8,11 @@ using Entities.DTOs;
 
 namespace Business.Abstract
 {
+    //10
+    //Login or register yapılması için gerekli olan interface.
     public interface IAuthService
     {
-        IDataResult<User> Login(UserForLoginDto userForLoginDto, string password);
+        IDataResult<User> Login(UserForLoginDto userForLoginDto);
         IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password);
         IDataResult<AccessToken> CreateAccessToken(User user);
         IResult UserExists(string email);

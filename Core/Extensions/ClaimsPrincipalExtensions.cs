@@ -4,6 +4,7 @@ using System.Security.Claims;
 
 namespace Core.Extensions
 {
+    //9
     //Bir kişinin claim'leri aranırken .Net biraz uğraştırır.
     //Bundan dolayı kolay erişim sağlayabilmek için aşağıdaki kod satırlarının yazılması gerekmektedir.
     public static class ClaimsPrincipalExtensions

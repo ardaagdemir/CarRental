@@ -12,7 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Core.Utilities.Security.JWT
 {
-    //6
+    //7
     //JwtHelper oluşturulan mimari içerisindedir. Bu yüzden Configuration injection yapılabildi.
     public class JwtHelper : ITokenHelper
     {
@@ -31,7 +31,7 @@ namespace Core.Utilities.Security.JWT
         public AccessToken CreateToken(User user, List<OperationClaim> operationClaims) //user ve operationClaims bilgilerinden bir Token oluşturmaya yarar.
         {
             _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration); //Token' ın biteceği zamanı belirleyen kod satırı.
-            var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey); //securityKey değerine, TokenOptions' daki(appsettings.json) SecurityKey değerini kullan.
+            var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey); //securityKey değerine, TokenOptions' daki(appsettings.json) SecurityKey değerini gönder.
             var signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey); //Hangi algoritmanın kullanacağının belirlendiği kısım.
 
             var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, operationClaims); //Ortaya bir tane jwt üretimi çıkacaktır. Buradaki 4 parametre daha önce oluşturulmuştu.
@@ -46,14 +46,14 @@ namespace Core.Utilities.Security.JWT
 
         }
 
-        public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user, //Verilen parametre bilgileri verilerek bir adet JwtSecurityToken oluşturuldu.
+        public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user, //Parametre bilgileri verilerek bir adet JwtSecurityToken oluşturuldu.
             SigningCredentials signingCredentials, List<OperationClaim> operationClaims)
         {
             var jwt = new JwtSecurityToken(
                 issuer: tokenOptions.Issuer, 
                 audience: tokenOptions.Audience,
                 expires: _accessTokenExpiration,
-                notBefore: DateTime.Now, //Şu andan önceli bir an için değer verilemez
+                notBefore: DateTime.Now, //Şu andan önceki bir an için değer verilemez
                 claims: SetClaims(user, operationClaims), //Kullanıcı claim'leri oluşturulurken aşağıda yardımcı bir metot oluşturulmuştur.
                 signingCredentials: signingCredentials
             );
