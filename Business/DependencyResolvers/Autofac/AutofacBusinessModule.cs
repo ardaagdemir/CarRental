@@ -31,7 +31,8 @@ namespace Business.DependencyResolvers.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             //Startup.cs' deki services.AddSingleton<>'a karşılık gelmektedir.
-            builder.RegisterType<CarManager>().As<ICarService>().SingleInstance(); //ICarService istenirse ona bir CarManager instance' ı ver anlamına gelir.
+            //ICarService istenirse ona bir CarManager instance' ı ver anlamına gelir.
+            builder.RegisterType<CarManager>().As<ICarService>().SingleInstance(); 
             builder.RegisterType<EfCarDal>().As<ICarDal>().SingleInstance();
 
             builder.RegisterType<BrandManager>().As<IBrandService>().SingleInstance();

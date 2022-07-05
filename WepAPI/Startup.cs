@@ -12,6 +12,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Concrete;
+using Core.Extensions;
+using Core.Utilities.DependencyResolvers;
+using Core.Utilities.IoC;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
@@ -19,6 +22,7 @@ using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 
 namespace WepAPI
 {
@@ -55,6 +59,15 @@ namespace WepAPI
                     };
                 });
 
+            //Ýstenilen her module buraya atanabilmektedir. Yalnýzca COreModule deðil bütün module' lar eklenebilir.
+            //Kullanabilmek için bir extension oluþturulabilir. Core' da Extensions altýnda oluþturulmuþtur.
+            //CoreModule gibi farklý module' lerde oluþturulduðunda buraya eklenebilir. Bu sayede baðýmlýlýklar çözümlenmiþ olur.
+            services.AddDependencyResolvers(new ICoreModule[]
+            {
+                new CoreModule()
+            });
+
+
             //ASP.Net Core Web API --- IoC(Inversion of Control)
             //.Net' in kendi IoC Container' ý bizim yerimize classlarý otomatik olarak new'ler.
             //Singleton--> Tüm bellekte bir adet CarManager oluþturur. Bütün instance'larý yaratmada kullanýr.
@@ -63,7 +76,6 @@ namespace WepAPI
             //AutofacBusinessModule' da üretilen instance'larýn WepApi' de tanýmlanabilmesi için WebApi' nin Program.cs' ine gidilir.
 
             //services.AddSingleton<ICarService,CarManager>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
