@@ -72,7 +72,7 @@ namespace Business.Concrete
         //Claim = product.add, admin...
         //Bir operasyon yetki gerektiriyorsa API tabanlı yapılarda JWT adında bir yapı kullanılır.
         [ValidationAspect(typeof(CarValidator))]
-        [SecuredOperation("car.add, admin")] //İşlem yapacak kişinin ya admin ya da car.add claim' i olması gereklidir.
+        [SecuredOperation("car.add, admin")] //İşlem yapacak kişinin ya admin ya da car.add claim' i olması gereklidir.Veritabanında gerekli yetkilendirme yapılmıştır.
         public IResult Add(Car car)
         {
             IResult result = BusinessRules.Run(CheckIfCareNameExist(car.CarName),
