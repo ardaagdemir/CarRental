@@ -33,7 +33,7 @@ namespace Business.Concrete
             }
 
             carImage.ImagePath = _fileHelper.Upload(file, PathConstants.ImagesPath);
-            carImage.Date = DateTime.Now; //Tarih otomatik olarak sistem tarafından atanacaktır.
+            carImage.Date = DateTime.Now;
             _carImageDal.Add(carImage);
             return new SuccessResult(Messages.ImageSuccessAdded);
         }
@@ -75,8 +75,6 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == imageId));
         }
-
-
 
         //BusinessRule
         private IResult CheckIfCarImageLimit(int carId)

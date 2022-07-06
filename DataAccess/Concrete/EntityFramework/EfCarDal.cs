@@ -13,9 +13,10 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, CarRentalDBContext>, ICarDal
     {
-        //CarDetailDto' da verilen nesneler burada birbirleri ile join edilmiş oldu
+        
         public List<CarDetailDto> GetCarDetails()
         {
+            //Disposible patter --> join
             using (CarRentalDBContext context = new CarRentalDBContext())
             {
                 var result = from c in context.Cars

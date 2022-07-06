@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using Castle.DynamicProxy;
@@ -22,6 +23,7 @@ namespace Core.Utilities.Interceptors
             //Ulaşılan attribute değerlerini IInterceptor listesine ekle
             classAttributes.AddRange(methodAttributes);
             //classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger))); //Otomatik olarak sistemdeki bütün metotları log' a dahil et.
+            
 
             //Çalışma sırasını da Priority' ye(öncelik değerine) göre sırala
             return classAttributes.OrderBy(x => x.Priority).ToArray();

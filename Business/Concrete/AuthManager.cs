@@ -13,13 +13,12 @@ using Entities.DTOs;
 namespace Business.Concrete
 {
     //11
-    //AuthService -->  Kayıt olmak, giriş yapmak, çıkış yapmak, token üreterek istekte bulunmak gibi operasyonlardan sorumludur.
+    //AuthService -->  Register, Login, Sign Out, Generate Token
     public class AuthManager : IAuthService
     {
         private IUserService _userService;
         private ITokenHelper _tokenHelper;
 
-        //Cons
         public AuthManager(IUserService userService, ITokenHelper tokenHelper)
         {
             _userService = userService;
@@ -27,11 +26,8 @@ namespace Business.Concrete
         }
 
         
-        //Kullanıcıdan Dto ve password alınmalıdır.
-        //Dto' da FirstName, LastName, Email ve password bulunmaktadır.
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
         {
-            //Öncelikle veritabanına bu veriyi gönderebilmek için passwordHash ve passwordSalt' ı kullanarak hash(CreatePasswordHash) oluşturulmalıdır.
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
             var user = new User

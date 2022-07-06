@@ -17,7 +17,6 @@ namespace DataAccess.Concrete.EntityFramework
             optionsBuilder.UseSqlServer(@"Server =DESKTOP-6OSPN7J\SQLEXPRESS; Database =CarRentalDB;Trusted_Connection=true");
         }
 
-        //Db ile Projede birbirine bağlanacak nesneler
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Color> Colors { get; set; }
@@ -27,8 +26,5 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<User> Users { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
-        
-
     }
-
 }

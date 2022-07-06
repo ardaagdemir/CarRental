@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Aspects.Autofac.Transaction;
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -18,6 +19,9 @@ namespace Business.Abstract
         IResult Add(Car car);
         IResult Delete(Car car);
         IResult Update(Car car);
-        
+
+        //It allows to undo an incorrect operation.
+        IResult TransactionalOperation(Car car);
+
     }
 }

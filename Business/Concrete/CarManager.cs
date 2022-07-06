@@ -10,6 +10,9 @@ using Business.Abstract;
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Business;
@@ -25,17 +28,14 @@ namespace Business.Concrete
     
     public class CarManager : ICarService
     {
-        //Global Variable
-        //LooselyCoupled
         private ICarDal _carDal;
-
-        //Constructor
         public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
         }
 
-        //Operation
+
+        [PerformanceAspect(5)]
         public IDataResult<List<Car>> GetAll()
         {
             //if (DateTime.Now.Hour==23)
@@ -46,6 +46,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarListed);
         }
 
+        
+        [SecuredOperation("car.add, admin")] //car.add, admin -->Database added to OperationClaim Table
+        [CacheAspect(duration: 10)]
         public IDataResult<List<Car>> GetByBrandId(int brandId)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId==brandId));
@@ -56,6 +59,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
         }
 
+        [CacheAspect]
         public IDataResult<Car> GetById(int carId)
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == carId));
@@ -66,13 +70,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarListed);
         }
 
-
-        //Bir metodun önünde, bir metodun sonunda veya bir metot hata verdiğinde, çalışması istenilen kod parçacıkları AOP mimarisi ile yazılır.
-        //Burada metot çalışmadan önce attribute kodları çalışacaktır. Şartlar sağlanıyorsa metot çalışır.
-        //Claim = product.add, admin...
-        //Bir operasyon yetki gerektiriyorsa API tabanlı yapılarda JWT adında bir yapı kullanılır.
+        
         [ValidationAspect(typeof(CarValidator))]
-        [SecuredOperation("car.add, admin")] //İşlem yapacak kişinin ya admin ya da car.add claim' i olması gereklidir.Veritabanında gerekli yetkilendirme yapılmıştır.
+        [CacheRemoveAspect("ICarService.Get")] //All the keys(containing 'Get') was removed
+
         public IResult Add(Car car)
         {
             IResult result = BusinessRules.Run(CheckIfCareNameExist(car.CarName),
@@ -94,10 +95,20 @@ namespace Business.Concrete
 
         }
 
+        [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")] 
         public IResult Update(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
+        }
+
+        [TransactionScopeAspect]
+        public IResult TransactionalOperation(Car car)
+        {
+            _carDal.Update(car);
+            _carDal.Add(car);
+            return new SuccessResult(Messages.CarUpdated);
         }
 
 
@@ -107,7 +118,7 @@ namespace Business.Concrete
             var result = _carDal.GetAll(c => c.BrandId == brandId).Count;
             if (result >= 10)
             {
-                return new ErrorResult("Büyük olamaz");
+                return new ErrorResult("Can't be big");
             }
 
             return new SuccessResult();
@@ -115,7 +126,7 @@ namespace Business.Concrete
 
         private IResult CheckIfCareNameExist(string carName)
         {
-            var result = _carDal.GetAll(c => c.CarName == carName).Any(); //Any = hiç var mı anlamına gelmektedir. Bool döndürür.
+            var result = _carDal.GetAll(c => c.CarName == carName).Any();
             if (result)
             {
                 return new ErrorResult(Messages.CarNameAlreadyExists);

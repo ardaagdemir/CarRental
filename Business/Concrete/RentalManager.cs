@@ -13,16 +13,14 @@ namespace Business.Concrete
 {
     public class RentalManager : IRentalService
     {
-        //Global variable
+        
         private IRentalDal _rentalDal;
-
-        //Constructor
         public RentalManager(IRentalDal rentalDal)
         {
             _rentalDal = rentalDal;
         }
 
-        //BusinessCode
+       
         public IDataResult<List<Rental>> GetAll()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
@@ -45,16 +43,16 @@ namespace Business.Concrete
         }
 
 
-        public IResult Delete(Rental rental) //Messages will change
+        public IResult Delete(Rental rental) 
         {
             _rentalDal.Delete(rental);
-            return new SuccessResult(Messages.CarDeleted);
+            return new SuccessResult(Messages.RentalDeleted);
         }
 
-        public IResult Update(Rental rental) //Messages will change
+        public IResult Update(Rental rental)
         {
             _rentalDal.Update(rental);
-            return new SuccessResult(Messages.CarUpdated);
+            return new SuccessResult(Messages.RentalUpdated);
         }
     }
 }
