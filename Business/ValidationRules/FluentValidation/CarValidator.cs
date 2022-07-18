@@ -6,14 +6,12 @@ using FluentValidation;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    //AbstractValidator aynı zamanda IValidator' dır.
+    //2
+    //AbstractValidator == IValidator
     public class CarValidator : AbstractValidator<Car>
     {
-        //2
-        //Validation -->Örneğin, Add metodunda eklenilmeye çalışılan nesnenin(car) iş kurallarına dahil edilmesi için yapısal olarak uygun olup olmadığına bakılan yapıdır.
-        //CarManager'da belirtilen koşullar burada tanımlanacaktır.
-        //Buradaki kurallar bir constructor içine yazılmaktadır.
-
+        
+        //Business Validation 
         public CarValidator()
         {
             RuleFor(c => c.CarName).MinimumLength(2);

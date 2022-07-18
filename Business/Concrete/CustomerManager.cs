@@ -13,9 +13,8 @@ namespace Business.Concrete
 {
     public class CustomerManager : ICustomerService
     {
-        //Global variable
+       
         private ICustomerDal _customerDal;
-        //Constructor
         public CustomerManager(ICustomerDal customerDal)
         {
             _customerDal = customerDal;

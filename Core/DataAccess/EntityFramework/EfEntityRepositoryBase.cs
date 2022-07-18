@@ -8,21 +8,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.DataAccess.EntityFramework
 {
-    //Veritabanına yapılacak herhangi bir CRUD operasyonu için kod tekrarından kurtulmaya yarayacak yapı
     public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
         where TEntity : class, IEntity, new()
         where TContext : DbContext, new()
     {
         public void Add(TEntity entity)
         {
-            //Buradaki CRUD metotları her bir EntityFramework katmanında aynı değişkenleri ve parametleri barındırdığından dolayı--
-            //bu yapılar için bir generic class oluşturulabilir.
-            //using bloğu her varlıktaki add, update, delete... operasyonları için yazılacağından ve alacağı DB parametresi aynı olduğundan generic class ile ilişkilendirilmelidir.
-            //Aynı şekilde her operasyonun parametresi bulunduğu varlığı temsil edeceğinden bu parametrelerde generic class ile ilişkilendirilmelidir.
-            //Bu class'ın yazılış amacı yukarıdaki gibidir.
-
-            //Belleğin hızlıca temizlenmesini sağlayan blok(dispose)
-            //---------IDisposable Pattern Implementation of C# -- Search----------
+            //---------IDisposable Pattern Implementation of C# ----------
             using (TContext context = new TContext())
             {
                 //Referansı yakala, ekle ve tut
@@ -55,7 +47,6 @@ namespace Core.DataAccess.EntityFramework
         {
             using (TContext context = new TContext())
             {
-                //Tek bir veri getirmek için DBSet'lerden Car' a git ve SingleOfDefault' a verilen filtreye göre getir.
                 return context.Set<TEntity>().SingleOrDefault(filter);
 
             }
@@ -66,7 +57,6 @@ namespace Core.DataAccess.EntityFramework
             using (TContext context = new TContext())
             {
                 //Ternary Operator
-                //Eğer filtre verilmemişse tüm veriyi getir,:, verilmemişse Car tablosundaki filtrelenen veriyi Listele ve getir.
                 return filter == null
                     ? context.Set<TEntity>().ToList()
                     : context.Set<TEntity>().Where(filter).ToList();

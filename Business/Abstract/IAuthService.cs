@@ -9,7 +9,7 @@ using Entities.DTOs;
 namespace Business.Abstract
 {
     //10
-    //Login or register
+    //Login-or-Register
     public interface IAuthService
     {
         IDataResult<User> Login(UserForLoginDto userForLoginDto);

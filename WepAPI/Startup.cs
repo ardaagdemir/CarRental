@@ -1,28 +1,19 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Business.Abstract;
-using Business.Concrete;
 using Core.Extensions;
 using Core.Utilities.DependencyResolvers;
 using Core.Utilities.IoC;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
-using DataAccess.Abstract;
-using DataAccess.Concrete;
-using DataAccess.Concrete.EntityFramework;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Http;
 
 namespace WepAPI
 {
@@ -40,7 +31,7 @@ namespace WepAPI
         {
             services.AddControllers();
 
-            //services.AddCors();
+            services.AddCors();
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -59,9 +50,7 @@ namespace WepAPI
                     };
                 });
 
-            //Ýstenilen her module buraya atanabilmektedir. Yalnýzca COreModule deðil bütün module' lar eklenebilir.
-            //Kullanabilmek için bir extension oluþturulabilir. Core' da Extensions altýnda oluþturulmuþtur.
-            //CoreModule gibi farklý module' lerde oluþturulduðunda buraya eklenebilir. Bu sayede baðýmlýlýklar çözümlenmiþ olur.
+            //Any module can be added
             services.AddDependencyResolvers(new ICoreModule[]
             {
                 new CoreModule()
@@ -78,6 +67,8 @@ namespace WepAPI
             }
 
             //Middle wear
+            app.UseCors(builder =>builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

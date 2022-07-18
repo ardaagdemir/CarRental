@@ -10,10 +10,8 @@ namespace Core.Utilities.Helpers.GuidHelpers
     {
         public static string CreateGuid()
         {
-            return Guid.NewGuid().ToString(); //Burada yüklenen dosya için eşsiz bir isim oluşturulur. Yani dosya eklerken dosyanın adı kendi olmasın, ona verilen bir isim                                               oluşturulsun ki aynı isimde başka bir dosya varsa çakışmasın anlamına gelir.
-                                              //Guid.NewGuid() --> bu metot eşsiz bir isim oluşturur.
-                                              //ToStringConverter() --> Bu metotla string bir ifadeye haline getirilir.
-
+            //Created a unique name for each file
+            return Guid.NewGuid().ToString(); 
         }
     }
 }

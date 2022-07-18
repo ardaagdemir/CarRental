@@ -19,11 +19,11 @@ namespace WepAPI
             CreateHostBuilder(args).Build().Run();
         }
 
-        //Server configürasyonun olduðu yer
+        //Server Configuration
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            //Kendimizin belirlediði bir IoCContainer(AutofacBusinessModule) yapýsýný kullanmak için DefaultBuilder olarak bu þekilde belirtmemiz gerekmektedir.
+            
             Host.CreateDefaultBuilder(args)
-                .UseServiceProviderFactory(new AutofacServiceProviderFactory())//Servis saðlayýcý fabrikasý olarak kullan
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
                 .ConfigureContainer<ContainerBuilder>(builder =>
                 {
                     builder.RegisterModule(new AutofacBusinessModule());

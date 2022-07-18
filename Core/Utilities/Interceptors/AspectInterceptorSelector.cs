@@ -9,23 +9,19 @@ namespace Core.Utilities.Interceptors
     public class AspectInterceptorSelector : IInterceptorSelector
     {
         //6
-        //IInterceptor array; Yazılan attribute' ları tek tek bularak bir dizi haline getirmeye yarar.
+        //IInterceptor array; Used to find attributes
         public IInterceptor[] SelectInterceptors(Type type, MethodInfo method, IInterceptor[] interceptors)
         {
-            //Class' ın attributelarını oku
+            //read attribute of class
             var classAttributes = type.GetCustomAttributes<MethodInterceptionBaseAttribute>
                 (true).ToList();
 
-            //Method' un attributelarını oku
+            //read attribute of method
             var methodAttributes = type.GetMethod(method.Name)
                 .GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
 
-            //Ulaşılan attribute değerlerini IInterceptor listesine ekle
             classAttributes.AddRange(methodAttributes);
-            //classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger))); //Otomatik olarak sistemdeki bütün metotları log' a dahil et.
-            
 
-            //Çalışma sırasını da Priority' ye(öncelik değerine) göre sırala
             return classAttributes.OrderBy(x => x.Priority).ToArray();
         }
     }

@@ -46,8 +46,8 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarListed);
         }
 
-        
-        [SecuredOperation("car.add, admin")] //car.add, admin -->Database added to OperationClaim Table
+        //car.add, admin -->Database added to OperationClaim Table
+        [SecuredOperation("car.add, admin")] 
         [CacheAspect(duration: 10)]
         public IDataResult<List<Car>> GetByBrandId(int brandId)
         {

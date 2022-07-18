@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -16,7 +13,7 @@ namespace DataAccess.Concrete.EntityFramework
         
         public List<CarDetailDto> GetCarDetails()
         {
-            //Disposible patter --> join
+            //Disposible patter
             using (CarRentalDBContext context = new CarRentalDBContext())
             {
                 var result = from c in context.Cars

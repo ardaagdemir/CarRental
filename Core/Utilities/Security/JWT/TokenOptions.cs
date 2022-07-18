@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-
+//6
+//Helper Class
 namespace Core.Utilities.Security.JWT
 {
-    //6
-    //Helper Class
+    
     public class TokenOptions
     {
         public string Audience { get; set; }

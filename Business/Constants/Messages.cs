@@ -7,7 +7,6 @@ using Core.Entities.Concrete;
 
 namespace Business.Constants
 {
-    //new'lememek için static kullandık
     public static class Messages
     {
         public static string CarAdded = "Araba eklendi";

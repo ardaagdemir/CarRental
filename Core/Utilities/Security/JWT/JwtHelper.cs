@@ -13,29 +13,28 @@ using Microsoft.IdentityModel.Tokens;
 namespace Core.Utilities.Security.JWT
 {
     //7
-    //JwtHelper oluşturulan mimari içerisindedir. Bu yüzden Configuration injection yapılabildi.
+    
     public class JwtHelper : ITokenHelper
     {
-        public IConfiguration Configuration { get; }//appsettings.json' da verilen değerleri okumaya yarar(get)
-        private TokenOptions _tokenOptions; //appsettings.json' da verilen değerleri tutar
-        private DateTime _accessTokenExpiration; //token' ın geçersiz olacağı zamanı belirlemek için bir nesne üretildi
+        public IConfiguration Configuration { get; }//get --> reads data from appsettings.json
+        private TokenOptions _tokenOptions; //keeps the values ​​given in appsettings.json
+        private DateTime _accessTokenExpiration; 
 
         public JwtHelper(IConfiguration configuration)
         {
-            //Configuration, ASP.Net Web API' da bulunan appsettings.json dosyasını okumaya yarar.
+            //Configuration --> reads appsettings.json file.
             Configuration = configuration;
-            _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>(); //Configuration.GetSection --> appsettings içindeki TokenOptions bölümünü al 
-            //Get<TokenOptions> --> aldığın değerleri TokenOptions' a map'le
+            _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>(); //Configuration.GetSection --> appsettings(TokenOptions)
+            //Get<TokenOptions> --> TokenOptions -> mapping
 
         }
-        public AccessToken CreateToken(User user, List<OperationClaim> operationClaims) //user ve operationClaims bilgilerinden bir Token oluşturmaya yarar.
+        public AccessToken CreateToken(User user, List<OperationClaim> operationClaims) 
         {
-            _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration); //Token' ın biteceği zamanı belirleyen kod satırı.
-            var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey); //securityKey değerine, TokenOptions' daki(appsettings.json) SecurityKey değerini gönder.
-            var signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey); //Hangi algoritmanın kullanacağının belirlendiği kısım.
-
-            var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, operationClaims); //Ortaya bir tane jwt üretimi çıkacaktır. Buradaki 4 parametre daha önce oluşturulmuştu.
-            var jwtSecurityTokenHandler = new JwtSecurityTokenHandler(); //CreateJwtSecurityToken' ı üretmek için
+            _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration); 
+            var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey); 
+            var signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey); 
+            var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, operationClaims);
+            var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             var token = jwtSecurityTokenHandler.WriteToken(jwt);
 
             return new AccessToken
@@ -46,25 +45,23 @@ namespace Core.Utilities.Security.JWT
 
         }
 
-        public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user, //Parametre bilgileri verilerek bir adet JwtSecurityToken oluşturuldu.
+        public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user, 
             SigningCredentials signingCredentials, List<OperationClaim> operationClaims)
         {
             var jwt = new JwtSecurityToken(
                 issuer: tokenOptions.Issuer, 
                 audience: tokenOptions.Audience,
                 expires: _accessTokenExpiration,
-                notBefore: DateTime.Now, //Şu andan önceki bir an için değer verilemez
-                claims: SetClaims(user, operationClaims), //Kullanıcı claim'leri oluşturulurken aşağıda yardımcı bir metot oluşturulmuştur.
+                notBefore: DateTime.Now, 
+                claims: SetClaims(user, operationClaims),
                 signingCredentials: signingCredentials
             );
             return jwt;
         }
 
-        //Yukarıda kullanıcının kullanıcı bilgilerini ve claimlerini parametre alarak bir adet Claim listesi oluştur.
-        //IEnumerable, List<>' in base' idir.
+        
         private List<Claim> SetClaims(User user, List<OperationClaim> operationClaims)
         {
-            //Var olan bir class'a yeni metotlar eklenebilir. Bunun adı 'Extension' (genişletmek)'dır.
             var claims = new List<Claim>();
             claims.AddNameIdentifier(user.Id.ToString());
             claims.AddEmail(user.Email);

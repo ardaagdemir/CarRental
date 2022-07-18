@@ -17,16 +17,6 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             //CarListTest();
-
-            //RentalAddTest();
-        }
-
-        private static void RentalAddTest()
-        {
-            //RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            //var result = rentalManager.GetByBrandId();
-
-
         }
 
         private static void CarListTest()

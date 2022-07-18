@@ -11,8 +11,8 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
 {
     public class MemoryCacheManager : ICacheManager
     {
-        //Cons Inj. burada çalışmaz. Sebebi Aspect' in bağımlılık zincirinin(WebAPI-Business-DataAccess) içinde olmamasıdır.
-        //Adapter Patter --> Var olan bir sistemi kendi sistemimize uyarlamak için kullanılan bir pattern'dir.
+        //The aspect is not in the dependency chain. Constructor Injection cannot work here
+        //Adapter Patter --> for customizing the system
         private IMemoryCache _memoryCache;
 
         public MemoryCacheManager()
@@ -27,7 +27,7 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
 
         public void Add(string key, object value, int duration)
         {
-            _memoryCache.Set(key, value, TimeSpan.FromMinutes(duration)); //TimeSpan --> zamanı algıla
+            _memoryCache.Set(key, value, TimeSpan.FromMinutes(duration)); //TimeSpan --> time detection
         }
 
         public object Get(string key)
@@ -37,8 +37,8 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
 
         public bool IsAdd(string key)
         {
-            //Bellek kontrolü
-            return _memoryCache.TryGetValue(key, out _); //out _ --> bir değer döndürülmek istenmiyorsa
+            //Memory Check
+            return _memoryCache.TryGetValue(key, out _); //out _ --> If you don't want to return a value
         }
 
         public void Remove(string key)
@@ -46,10 +46,7 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
              _memoryCache.Remove(key);
         }
 
-        //Çalışma anında bellekten silmeye yarar
-        //Reflection --> Dinamik olarak sistem içerisindeki(app domain) yüklü olan tipleri en küçük birimden en büyük birime kadar yönetmeyi sağlar. İçerisindeki meta-data' ları almaya yarar.
-        //Bir IoC-Container tasarlarken Reflection kullanılabilir. Yazılmış bütün IoCContainer' larda Reflection hazır olarak bulunmaktadır.
-        //Kodu çalışma anında oluşturma, koda çalışma anında müdahele etme gibi durumlarda reflection kullanılır. 
+        //Reflection --> IoC Container
         public void RemoveByPattern(string pattern)
         {
             var cacheEntriesCollectionDefinition = typeof(MemoryCache).GetProperty("EntriesCollection", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);

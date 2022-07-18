@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.Utilities.DependencyResolvers
 {
-    //Dependency' ler arasında tüm projelerde ortak kullanılacak olanlar burada yazılmaktadır.
+    //Common Dependencies
     public class CoreModule : ICoreModule
     {
         public void Load(IServiceCollection serviceCollection)

@@ -3,26 +3,22 @@ using Castle.DynamicProxy;
 
 namespace Core.Utilities.Interceptors
 {
+    //5
     public abstract class MethodInterception : MethodInterceptionBaseAttribute
     {
-        //5
-        //Hangi metot çalıştırılmak isteniyorsa burada parametre olarak verilir.
-        //Örneğin OnBefore(CarValidator Add) gibi..
+        
         protected virtual void OnBefore(IInvocation invocation) { }
         protected virtual void OnAfter(IInvocation invocation) { }
         protected virtual void OnException(IInvocation invocation, System.Exception e) { }
-        protected virtual void OnSuccess(IInvocation invocation) { } //invocation --> çalıştırılmak istenilen metoda karşılık gelmektedir
+        protected virtual void OnSuccess(IInvocation invocation) { } //invocation --> method
                                     
 
         public override void Intercept(IInvocation invocation)
         {
             var isSuccess = true;
 
-            //Metodun nerede çalıştırılması gerektiğini belirleyen blok
-            //Genelde OnBefore ve OnException kullanılmaktadır.
-
-            //Bütün metodlarda çalışacak temel try-catch bloğu
-            OnBefore(invocation); //OnBefore, kodun başında çalışır
+            
+            OnBefore(invocation); 
             try
             {
                 invocation.Proceed();
@@ -30,18 +26,18 @@ namespace Core.Utilities.Interceptors
             catch (Exception e) 
             {
                 isSuccess = false;
-                OnException(invocation, e); //Metot sırasında çalışır
+                OnException(invocation, e);
                 throw;
             }
             finally
             {
                 if (isSuccess)
                 {
-                    OnSuccess(invocation); //Metot başarılı olduğunda çalışır
+                    OnSuccess(invocation);
                 }
             }
 
-            OnAfter(invocation); //Metottan sonra çalışır
+            OnAfter(invocation); 
         }
     }
 }
